@@ -1,0 +1,25 @@
+<div class="container-fuid">
+	<div class="row">
+    <div class="col-sm-5">
+			<form (submit)='register(formData)' #formData='ngForm'>
+				<h3>Please Register</h3>
+				<h4>First Name: <input type="text" name="first_name" ngModel></h4>
+				<h4>Last Name: <input type="text" name="last_name" ngModel></h4>
+				<h4>Userame: <input type="text" name="username" ngModel></h4>
+				<h4>Email: <input type="email" name="email" ngModel></h4>
+				<h4>Password: <input type="password" name="password" ngModel></h4>
+				<h4><button>Register</button></h4>
+			</form>
+    </div>
+		<p *ngFor='let err of registererrors'> {{ err }}</p>
+    <div class="col-sm-5">
+			<form (submit)='login(formData)' #formData='ngForm'>
+				<h3>Please Log In</h3>
+				<h4>Username: <input type="text" name="username" ngModel></h4>
+				<h4>Password: <input type="password" name="password" ngModel></h4>
+				<h4><button>Login</button></h4>
+			</form>
+    </div>
+
+	</div>
+</div>

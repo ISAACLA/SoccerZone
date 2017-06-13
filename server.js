@@ -17,7 +17,7 @@ var whateverWeWant = {
 }
 
 app.use(session(whateverWeWant));
-app.use(express.static(path.join(__dirname,'public','dist')));
+app.use(express.static(path.join(__dirname,'client','dist')));
 
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
@@ -26,7 +26,7 @@ require('./server/config/mongoose');
 require('./server/config/routes')(app);
 
 app.get('*', function (req, res) {
-  res.sendFile(path.resolve('public/dist/index.html'));
+  res.sendFile(path.resolve('client/dist/index.html'));
 })
 
 app.listen(8888,()=>{console.log('server is listening on 8888')})
