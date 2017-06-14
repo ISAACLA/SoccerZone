@@ -7,7 +7,8 @@ let ProfileSchema = new Schema ({
   state: {type:String},
   zipcode: {
     type:Number,
-    required; [true,"Zipcode is required"],
-
+    required: [true,"Zipcode is required"],
+    min:[5,"Zipcode should be 5 numbers"],
+    max: [5, "Zipcode should be 5 numbers"],
   }
 })
