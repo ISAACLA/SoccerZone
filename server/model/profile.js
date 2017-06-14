@@ -5,6 +5,7 @@ let ProfileSchema = new Schema ({
   address: {type:String},
   city: {type:String},
   state: {type:String},
+  age: {type:Number},
   zipcode: {
     type:Number,
     required: [true,"Zipcode is required"],
