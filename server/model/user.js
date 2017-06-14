@@ -17,6 +17,7 @@ let UserSchema = new Schema ({
   username: {
     type:String,
     required:[true, "Username is required!"],
+    unique: [true, "This username is already taken"],
     minlength: [2, "Username should have at least 2 characters"],
     maxlength: [25,"Username have at most 25 characters"]
   },
@@ -35,7 +36,7 @@ let UserSchema = new Schema ({
     minlength: [5,"Your password must have at least 5 characters"],
     maxlength: [25, "Password have at most 25 characters"]
   },
-  // profiles: [{type:Schema.Types.ObjectId, ref: "Profile"}],
+  profiles: [{type:Schema.Types.ObjectId, ref: "Profile"}],
   // password_confirmation:
 }, {timestamps:true})
 

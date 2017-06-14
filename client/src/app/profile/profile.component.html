@@ -1,4 +1,4 @@
-<h2>User **the user name ** Profile</h2>
+<h2 *ngIf='user'>{{ user.username}}'s' Profile</h2>
 <form>
   <h3>Address 1: <input type="text" name="address1" value=""></h3>
   <h3>City: <input type="text" name="city" value=""></h3>
