@@ -1,7 +1,7 @@
 <div class="container-fuid">
 	<div class="row">
     <div class="col-sm-5">
-			<form (submit)='register(formData)' #formData='ngForm'>
+			<form (submit)='register(registerData)' #registerData='ngForm'>
 				<h3>Please Register</h3>
 				<h4>First Name: <input type="text" name="first_name" ngModel></h4>
 				<h4>Last Name: <input type="text" name="last_name" ngModel></h4>
@@ -11,7 +11,7 @@
 				<h4><button>Register</button></h4>
 			</form>
     </div>
-		<p *ngFor='let err of registererrors'> {{ err }}</p>
+		<p *ngFor='let err of errors'> {{ err }}</p>
     <div class="col-sm-5">
 			<form (submit)='login(formData)' #formData='ngForm'>
 				<h3>Please Log In</h3>

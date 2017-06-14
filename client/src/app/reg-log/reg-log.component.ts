@@ -8,7 +8,7 @@ import { Router } from '@angular/router'
   styleUrls: ['./reg-log.component.css']
 })
 export class RegLogComponent implements OnInit {
-  registererrors: any
+  errors: any
   constructor(
     private _reglogService: RegLogService,
     private _router:Router
@@ -17,10 +17,10 @@ export class RegLogComponent implements OnInit {
   ngOnInit() {
   }
 
-  register(formData){
-    this._reglogService.register(formData.value)
+  register(registerData){
+    this._reglogService.register(registerData.value)
     .then( (response)=>this._router.navigate(['/dashboard']) )
-    .catch( (err)=> this.registererrors=err._body.split(',') )
+    .catch( (err)=> this.errors=err._body.split(',') )
   }
 
   login(formData){
