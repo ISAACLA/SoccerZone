@@ -1,0 +1,21 @@
+<a href="/logout">Logout</a>
+<a [routerLink]="['/dashboard']">Go Back</a>
+<h2>This is the team page, user should seen the teams in the area as well as the new team form</h2>
+
+
+<h3>Create a new event</h3>
+<form (submit)='newevent(formData)' #formData='ngForm'>
+  <label>Event</label>
+  <input type="text" name="events" ngModel>
+  <label>Zipcode</label>
+  <input type="number" name="zipcode" ngModel>
+  <label>Location</label>
+  <input type="text" name="location" ngModel>
+  <label>Date</label>
+  <input type="date" name="date" ngModel>
+  <label>Time</label>
+  <input type="time" name="time" ngModel>
+  <button>New Event</button>
+</form>
+
+<p *ngFor='let err of errors'>{{ err }}</p>

@@ -36,6 +36,11 @@ let UserSchema = new Schema ({
     minlength: [5,"Your password must have at least 5 characters"],
     maxlength: [25, "Password have at most 25 characters"]
   },
+  zipcode: {
+    type: Number,
+    required:[true, "Zipcode is required"],
+    length:[5,"Zipcode should have 5 digits exactly"]
+  },
   profiles: [{type:Schema.Types.ObjectId, ref: "Profile"}],
   // password_confirmation:
 }, {timestamps:true})

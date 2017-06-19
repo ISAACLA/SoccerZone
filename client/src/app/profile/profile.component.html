@@ -1,10 +1,12 @@
+<a href="/logout">Logout</a>
+<a [routerLink]="['/dashboard']">Dashboard</a>
 <h2 *ngIf='user'>{{ user.username}}'s' Profile</h2>
-<form>
-  <h3>Address 1: <input type="text" name="address1" value=""></h3>
-  <h3>City: <input type="text" name="city" value=""></h3>
+<form (submit)='profile(formData)' #formData='ngForm'>
+  <h3>Address: <input type="text" name="address" ngModel></h3>
+  <h3>City: <input type="text" name="city" ngModel></h3>
   <h3>
     State:
-    <select name="state">
+    <select name="state" ngModel>
       <option value="AL">AL</option>
       <option value="AK">AK</option>
       <option value="AZ">AZ</option>
@@ -58,6 +60,9 @@
       <option value="WY">WY</option>
     </select>
   </h3>
-  <h3>Zipcode: <input type="number" name="zipcode"></h3>
   <h3>Age: <input type="number" name="age" ngModel></h3>
+  <h3>Favorite Player: <input type="text" name="favplayer" ngModel></h3>
+  <h3>Favorite Team: <input type="text" name="favteam" ngModel></h3>
+  <h3><button>Submit</button></h3>
 </form>
+<p *ngFor='let err of errors'> {{ err }}</p>

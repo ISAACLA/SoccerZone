@@ -1,0 +1,15 @@
+<a href="/logout">Logout</a>
+<a [routerLink]="['/dashboard']">Go Back</a>
+<h2>This is the team page, user should seen the teams in the area as well as the new team form</h2>
+
+
+<h3>Create a new team</h3>
+<form (submit)='newteam(formData)' #formData='ngForm'>
+  <label>Name: </label>
+  <input type="text" name="name" ngModel>
+  <label>Zipcoce: </label>
+  <input type="number" name="zipcode" ngModel>
+  <button>New Team</button>
+</form>
+
+<p *ngFor='let err of errors'>{{ err }}</p>

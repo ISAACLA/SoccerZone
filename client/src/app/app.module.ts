@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { RegLogService } from './reg-log/reg-log.service';
 import { ProfileService } from './profile/profile.service';
+import { TeamService } from './team/team.service';
+import { EventService } from './event/event.service';
 
 import { AppComponent } from './app.component';
 import { RegLogComponent } from './reg-log/reg-log.component';
@@ -12,7 +14,9 @@ import { RegLogComponent } from './reg-log/reg-log.component';
 import { routing } from './app.routes';
 import { IndexComponent } from './index/index.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProfileComponent } from './profile/profile.component'
+import { ProfileComponent } from './profile/profile.component';
+import { TeamComponent } from './team/team.component';
+import { EventComponent } from './event/event.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { ProfileComponent } from './profile/profile.component'
     RegLogComponent,
     IndexComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    TeamComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,9 @@ import { ProfileComponent } from './profile/profile.component'
   ],
   providers: [
     RegLogService,
-    ProfileService
+    ProfileService,
+    TeamService,
+    EventService
   ],
   bootstrap: [AppComponent]
 })

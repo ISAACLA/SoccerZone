@@ -6,10 +6,10 @@ let ProfileSchema = new Schema ({
   city: {type:String},
   state: {type:String},
   age: {type:Number},
-  zipcode: {
-    type:Number,
-    required: [true,"Zipcode is required"],
-    min:[5,"Zipcode should be 5 numbers"],
-    max: [5, "Zipcode should be 5 numbers"],
-  }
-})
+  favplayer:{type:String},
+  favteam:{type:String},
+  position:{type:String},
+  _user: {type:Schema.Types.ObjectId, ref: "User"}
+}, {timestamps:true})
+
+mongoose.model("Profile", ProfileSchema)

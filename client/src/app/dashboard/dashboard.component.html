@@ -1,4 +1,42 @@
 <a href="/logout">Logout</a>
 <a [routerLink]="['/profile']">Profile</a>
 <h2 *ngIf='user'> Welcome {{ user.username }} </h2>
-<h1>This is my dashboard page, what do i need here to make it awesome dashboard page?</h1>
+<hr>
+<h3>this is my team section based on my zipcode</h3>
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Players</td>
+    <td>Zipcode</td>
+    <td>Action</td>
+  </tr>
+  <tr *ngFor='let team of teams'>
+    <td>{{ team.name }}</td>
+    <td>{{ team.players }}</td>
+    <td>{{ team.zipcode }}</td>
+    <td><button>Join</button></td>
+  </tr>
+</table>
+
+<h4>Create a new team <a [routerLink]="['/team']">HERE</a></h4>
+
+<h3>This is my event section based on my zipcode</h3>
+<table>
+  <tr>
+    <th>Event</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Location</th>
+    <th>Contact</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor='let event of events'>
+    <td>{{ event.events }}</td>
+    <td>{{ event.date | date:'yMMMd' }}</td>
+    <td>{{ event.time }}</td>
+    <td>{{ event.location }}</td>
+    <td>**CONTACT ***</td>
+    <td><button>Join</button></td>
+  </tr>
+</table>
+<h4>Create a new Event <a [routerLink]="['/event']">HERE</a></h4>
