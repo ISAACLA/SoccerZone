@@ -16,7 +16,9 @@ import { IndexComponent } from './index/index.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TeamComponent } from './team/team.component';
-import { EventComponent } from './event/event.component'
+import { EventComponent } from './event/event.component';
+import { TeamShowComponent } from './team/team-show/team-show.component';
+import { EventShowComponent } from './event/event-show/event-show.component'
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { EventComponent } from './event/event.component'
     DashboardComponent,
     ProfileComponent,
     TeamComponent,
-    EventComponent
+    EventComponent,
+    TeamShowComponent,
+    EventShowComponent
   ],
   imports: [
     BrowserModule,

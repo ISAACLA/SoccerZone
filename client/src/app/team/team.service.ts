@@ -20,4 +20,16 @@ export class TeamService {
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
+
+  jointeam(id){
+    return this._http.get('/api/jointeam/'+id)
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
+
+  gettheteam(id){
+    return this._http.get('/api/theteam/'+id)
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
 }

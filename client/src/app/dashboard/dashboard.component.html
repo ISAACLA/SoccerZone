@@ -11,10 +11,10 @@
     <td>Action</td>
   </tr>
   <tr *ngFor='let team of teams'>
-    <td>{{ team.name }}</td>
+    <td><a [routerLink]="['/team',team._id]">{{ team.name }}</a></td>
     <td>{{ team.players }}</td>
     <td>{{ team.zipcode }}</td>
-    <td><button>Join</button></td>
+    <td><button (click)='jointeam(team._id)'>Join</button></td>
   </tr>
 </table>
 
@@ -31,12 +31,12 @@
     <th>Action</th>
   </tr>
   <tr *ngFor='let event of events'>
-    <td>{{ event.events }}</td>
+    <td><a [routerLink]="['/event', event._id]">{{ event.events }}</a> </td>
     <td>{{ event.date | date:'yMMMd' }}</td>
     <td>{{ event.time }}</td>
     <td>{{ event.location }}</td>
     <td>**CONTACT ***</td>
-    <td><button>Join</button></td>
+    <td><button (click)='joinevent(event._id)'>Join</button></td>
   </tr>
 </table>
 <h4>Create a new Event <a [routerLink]="['/event']">HERE</a></h4>

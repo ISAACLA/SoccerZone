@@ -44,4 +44,15 @@ export class DashboardComponent implements OnInit {
     .catch( (err)=>console.log(err) )
   }
 
+  jointeam(team_id){
+    this._teamService.jointeam(team_id)
+    .then( (response)=>this.zipcodeteams() )
+    .catch( (err)=>console.log(err))
+  }
+
+  joinevent(event_id){
+    this._eventService.joinevent(event_id)
+    .then( (respnose)=>this.zipcodeevents() )
+    .catch( (err)=>console.log(err))
+  }
 }

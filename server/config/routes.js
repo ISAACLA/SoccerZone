@@ -10,8 +10,12 @@ module.exports=(app)=>{
 
   app.post('/api/teams', controller.newteam)
   app.get('/api/zipcodeteams', controller.zipcodeteams)
+  app.get('/api/jointeam/:id', controller.jointeam)
+  app.get('/api/theteam/:id', controller.theteam)
 
   app.post('/api/events', controller.newevents)
   app.get('/api/zipcodeevents',controller.zipcodeevents)
+  app.get('/api/joinevent/:id', controller.joinevent)
+  app.get('/api/theevent/:id', controller.theevent)
 
 }

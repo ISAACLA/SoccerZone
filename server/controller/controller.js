@@ -146,6 +146,69 @@ module.exports = {
         }
       })
     }
+  },
+
+  jointeam: (req,res)=>{
+    if(!req.session.user){
+      return res.status(500).send("No User")
+    }else{
+      Team.findOne({_id:req.params.id},(err,theteam)=>{
+        if(err){
+          console.log(err)
+        }else{
+          theteam.players += 1;
+          theteam.squad.push(req.session.user)
+          theteam.save( (err,savedteam)=>{
+            if(err){
+              console.log(err)
+            }else{
+              return res.json(savedteam)
+            }
+          })
+        }
+      })
+    }
+  },
+
+  joinevent: (req, res)=>{
+    if(!req.session.user){
+      return res.status(500).send("No User")
+    }else{
+      Event.findOne({_id:req.params.id},(err,theevent)=>{
+        if(err){
+          console.log(err)
+        }else{
+          theevent.attendees.push(req.session.user);
+          theevent.save( (err,savedevent)=>{
+            if(err){
+              console.log(err)
+            }else{
+              return res.json(savedevent)
+            }
+          })
+        }
+      })
+    }
+  },
+
+  theteam: (req,res)=>{
+    Team.findOne({_id:req.params.id},(err,theteam)=>{
+      if(err){
+        console.log(err)
+      }else{
+        return res.json(theteam)
+      }
+    })
+  },
+
+  theevent: (req,res)=>{
+    Event.findOne({_id:req.params.id}, (err,theevent)=>{
+      if(err){
+        console.log(err)
+      }else{
+        return res.json(theevent)
+      }
+    })
   }
 
 }

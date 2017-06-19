@@ -20,4 +20,16 @@ export class EventService {
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
+
+  joinevent(id){
+    return this._http.get('/api/joinevent/'+id)
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
+
+  gettheevent(id){
+    return this._http.get('/api/theevent/'+id)
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
 }
