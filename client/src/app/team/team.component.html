@@ -13,3 +13,21 @@
 </form>
 
 <p *ngFor='let err of errors'>{{ err }}</p>
+<hr>
+<h3>All teams</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Captain</th>
+    <th>Players</th>
+    <th>Zipcode</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor='let team of teams'>
+    <td><a [routerLink]="['/team', team._id]">{{ team.name }}</a></td>
+    <td>{{ team._user.username }}</td>
+    <td>{{ team.players }}</td>
+    <td>{{ team.zipcode }}</td>
+    <td><button (click)='jointeam(team._id)'>Join</button></td>
+  </tr>
+</table>

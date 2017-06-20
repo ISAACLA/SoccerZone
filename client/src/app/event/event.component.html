@@ -19,3 +19,25 @@
 </form>
 
 <p *ngFor='let err of errors'>{{ err }}</p>
+<hr>
+<h3>All events</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Hoster</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Attendees</th>
+    <th>Zipcode</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor='let event of events'>
+    <td><a [routerLink]="['/event', event._id]">{{ event.events }}</a></td>
+    <td>{{ event._user.username }}</td>
+    <td>{{ event.date | date:'yMMMd' }}</td>
+    <td>{{ event.time }}</td>
+    <td>{{ event.attendees.length }}</td>
+    <td>{{ event.zipcode }}</td>
+    <td><button (click)='joinevent(event._id)'>Join</button></td>
+  </tr>
+</table>

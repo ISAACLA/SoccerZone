@@ -27,7 +27,7 @@
     <th>Date</th>
     <th>Time</th>
     <th>Location</th>
-    <th>Contact</th>
+    <th>Hoster</th>
     <th>Action</th>
   </tr>
   <tr *ngFor='let event of events'>
@@ -35,7 +35,7 @@
     <td>{{ event.date | date:'yMMMd' }}</td>
     <td>{{ event.time }}</td>
     <td>{{ event.location }}</td>
-    <td>**CONTACT ***</td>
+    <td>{{ event._user.username }}</td>
     <td><button (click)='joinevent(event._id)'>Join</button></td>
   </tr>
 </table>

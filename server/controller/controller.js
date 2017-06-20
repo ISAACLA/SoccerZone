@@ -4,6 +4,8 @@ let User = mongoose.model("User");
 let Profile = mongoose.model("Profile");
 let Team = mongoose.model("Team");
 let Event = mongoose.model("Event");
+let Post = mongoose.model("Post");
+let Comment = mongoose.model("Comment");
 
 module.exports = {
   register: (req, res)=>{
@@ -138,7 +140,7 @@ module.exports = {
     if(!req.session.user){
       return res.status(500).send("No User")
     }else{
-      Event.find({zipcode:req.session.user.zipcode},(err,theevents)=>{
+      Event.find({zipcode:req.session.user.zipcode}).populate('_user').exec((err,theevents)=>{
         if(err){
           console.log(err)
         }else{
@@ -213,6 +215,26 @@ module.exports = {
         console.log(err)
       }else{
         return res.json(theevent)
+      }
+    })
+  },
+
+  allteams: (req,res)=>{
+    Team.find({}).populate('_user').sort({zipcode:1}).exec((err,teams)=>{
+      if(err){
+        console.log(err)
+      }else{
+        return res.json(teams)
+      }
+    })
+  },
+
+  allevents: (req,res)=>{
+    Event.find({}).populate('_user').sort({zipcode:1}).exec((err,events)=>{
+      if(err){
+        console.log(err)
+      }else{
+        return res.json(events)
       }
     })
   },

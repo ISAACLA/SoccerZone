@@ -32,4 +32,10 @@ export class EventService {
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
+
+  allevents(){
+    return this._http.get('/api/events')
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
 }

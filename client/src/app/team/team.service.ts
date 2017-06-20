@@ -32,4 +32,10 @@ export class TeamService {
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
+
+  allteams(){
+    return this._http.get('/api/teams')
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
 }

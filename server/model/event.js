@@ -8,6 +8,7 @@ let EventSchema = new Schema ({
   location:{type:String,required:[true,"Location is required!"]},
   date: {type:Date,required:[true,"Date is required!"]},
   time: {type:String,required: [true, "Time is required!"]},
+  posts: [{type:Schema.Types.ObjectId, ref:"Post"}],
   _user: {type:Schema.Types.ObjectId, ref: "User"}
 }, {timestamps:true})
 
