@@ -38,4 +38,17 @@ export class EventService {
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
+
+  newpost(data,eventid){
+    return this._http.post('/api/posts/'+eventid, data)
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
+
+  newcomment(data,postid){
+    return this._http.post('/api/comments/'+postid, data)
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
+
 }

@@ -17,3 +17,27 @@
 
 <hr>
 <h3>Message Board</h3>
+<h4>Add your post here...</h4>
+<form (submit)='newpost(formData, event._id)' #formData='ngForm'>
+  <textarea name="post" rows="3" cols="60" ngModel></textarea>
+  <br>
+  <button>Post</button>
+</form>
+<p *ngFor='let err of errors'> {{ err }}</p>
+<hr>
+<div *ngIf="event">
+  <div *ngFor="let p of event.posts">
+    <h4> <i>{{ p._user.username }}</i>: {{ p.post }}</h4>
+
+    <div *ngFor="let comment of p.comments">
+      <h5> {{ comment._user.username }} - {{ comment.comment}}</h5>
+    </div>
+
+    <form (submit)='newcomment(formData, p._id)' #formData='ngForm'>
+      <textarea name="comment" rows="2" cols="40" ngModel></textarea>
+      <br>
+      <button>Comment</button>
+    </form>
+    <p *ngFor='let err of commenterrors'> {{ err }}</p>
+  </div>
+</div>

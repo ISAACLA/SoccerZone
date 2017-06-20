@@ -20,4 +20,8 @@ module.exports=(app)=>{
   app.get('/api/theevent/:id', controller.theevent)
   app.get('/api/events', controller.allevents)
 
+  app.post('/api/posts/:id', controller.newpost)
+
+  app.post('/api/comments/:id', controller.newcommnet)
+
 }
