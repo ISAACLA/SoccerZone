@@ -2,3 +2,10 @@
 <a [routerLink]="['/dashboard']">Go Back</a>
 
 <h2 *ngIf='event'>{{ event.events }}</h2>
+<h2 *ngIf='event'>{{ event.zipcide }}</h2>
+<h2 *ngIf='event'>Hoster: {{ event._user.username }}</h2>
+<div *ngIf='event'>
+  <h3 *ngFor='let attendee of event.attendees'> {{ attendee.username }}</h3>
+</div>
+<h3 *ngIf='event'>{{ event.date }}</h3>
+<h3 *ngIf='event'>{{ event.time }}</h3>

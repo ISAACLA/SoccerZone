@@ -3,3 +3,8 @@
 
 
 <h2 *ngIf='team'>{{ team.name }}</h2>
+<h2 *ngIf='team'>{{ team.players }}</h2>
+<div *ngIf="team">
+  <span *ngFor='let player of team.squad'>{{ player.username }} | </span>
+</div>
+<h2 *ngIf='team'>{{ team.zipcode }}</h2>

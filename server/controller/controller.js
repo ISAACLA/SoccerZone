@@ -192,7 +192,10 @@ module.exports = {
   },
 
   theteam: (req,res)=>{
-    Team.findOne({_id:req.params.id},(err,theteam)=>{
+    Team.findOne({_id:req.params.id})
+    .populate('_user')
+    .populate({path:'squad',populate:{path:'user'}})
+    .exec( (err,theteam)=>{
       if(err){
         console.log(err)
       }else{
@@ -202,13 +205,16 @@ module.exports = {
   },
 
   theevent: (req,res)=>{
-    Event.findOne({_id:req.params.id}, (err,theevent)=>{
+    Event.findOne({_id:req.params.id})
+    .populate('_user')
+    .populate({path:'attendees', populete:{path:'user'}})
+    .exec((err,theevent)=>{
       if(err){
         console.log(err)
       }else{
         return res.json(theevent)
       }
     })
-  }
+  },
 
 }
