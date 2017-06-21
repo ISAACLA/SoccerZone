@@ -9,31 +9,31 @@ export class EventService {
     private _http:Http
   ) { }
 
-  newevent(data){
+  newEvent(data){
     return this._http.post('/api/events', data)
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
 
-  zipcodeevents(){
-    return this._http.get('/api/zipcodeevents')
+  zipcodeEvents(){
+    return this._http.get('/api/zipcodeEvents')
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
 
-  joinevent(id){
-    return this._http.get('/api/joinevent/'+id)
+  joinEvent(id){
+    return this._http.get('/api/joinEvent/'+id)
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
 
-  gettheevent(id){
-    return this._http.get('/api/theevent/'+id)
+  getEvent(id){
+    return this._http.get('/api/event/'+id)
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
 
-  allevents(){
+  allEvents(){
     return this._http.get('/api/events')
     .map( (response:Response)=>response.json() )
     .toPromise()

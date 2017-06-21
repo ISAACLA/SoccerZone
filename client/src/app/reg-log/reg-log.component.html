@@ -1,26 +1,67 @@
-<div class="container-fuid">
-	<div class="row">
-    <div class="col-sm-5">
-			<form (submit)='register(registerData)' #registerData='ngForm'>
-				<h3>Please Register</h3>
-				<h4>First Name: <input type="text" name="first_name" ngModel></h4>
-				<h4>Last Name: <input type="text" name="last_name" ngModel></h4>
-				<h4>Userame: <input type="text" name="username" ngModel></h4>
-				<h4>Email: <input type="email" name="email" ngModel></h4>
-				<h4>Zipcode: <input type="number" name="zipcode" ngModel></h4>
-				<h4>Password: <input type="password" name="password" ngModel></h4>
-				<h4><button>Register</button></h4>
-			</form>
-    </div>
-		<p *ngFor='let err of errors'> {{ err }}</p>
-    <div class="col-sm-5">
-			<form (submit)='login(formData)' #formData='ngForm'>
-				<h3>Please Log In</h3>
-				<h4>Username: <input type="text" name="username" ngModel></h4>
-				<h4>Password: <input type="password" name="password" ngModel></h4>
-				<h4><button>Login</button></h4>
-			</form>
-    </div>
+<div class="body">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand active" href="#">SoccerZone</a>
+		</div>
 
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+			<li><a href="#">Events<span class="sr-only">(current)</span></a></li>
+			<li><a href="#">Teams</a></li>
+		  </ul>
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a [routerLink]="['']">Front Page</a></li>
+		  </ul>
+		</div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+
+	<div class="container">
+		<div *ngFor='let err of errors' class="alert alert-danger" role="alert"><p>{{ err }}</p></div>
+		<div class="row">
+	    <div class="col-sm-5">
+			<div class="panel panel-primary">
+			  <div class="panel-heading">Register</div>
+			  <div class="panel-body">
+				  <form (submit)='register(registerData)' #registerData='ngForm'>
+					  <p>First Name: <input type="text" name="first_name" ngModel></p>
+					  <p>Last Name: <input type="text" name="last_name" ngModel></p>
+					  <p>Userame: <input type="text" name="username" ngModel></p>
+					  <p>Email: <input type="email" name="email" ngModel></p>
+					  <p>Zipcode: <input type="number" name="zipcode" ngModel></p>
+					  <p>Password: <input type="password" name="password" ngModel></p>
+					  <p><button type="submit" class="btn btn-default">Register</button></p>
+				  </form>
+			  </div>
+			</div>
+	    </div>
+	    <div class="col-sm-5">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Login</div>
+				<div class="panel-body">
+					<form (submit)='login(formData)' #formData='ngForm'>
+						<p>Username: <input type="text" name="username" ngModel></p>
+						<p>Password: <input type="password" name="password" ngModel></p>
+						<p><button type="submit" class="btn btn-default">Login</button></p>
+					</form>
+				</div>
+			</div>
+	    </div>
+
+		</div>
 	</div>
+
+	<div class="footer">
+        <h5>Briggs & Isaac</h5>
+        <p>SoccerZone.com © 2017 · All Rights Reserved</p>
+    </div>
 </div>

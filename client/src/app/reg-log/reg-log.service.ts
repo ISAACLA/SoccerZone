@@ -21,8 +21,8 @@ export class RegLogService {
     .toPromise()
   }
 
-  currentuser(){
-    return this._http.get('/api/currentuser')
+  currentUser(){
+    return this._http.get('/api/currentUser')
     .map( (response:Response)=>response.json() )
     .toPromise()
   }

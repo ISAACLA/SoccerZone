@@ -1,3 +1,15 @@
+.body{
+    height: 100%;
+    position: relative;
+    background: linear-gradient(white, #bbb);
+    padding-bottom: 300px;
+}
+
+.teams{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+}
 
 table {
     font-family: arial, sans-serif;
@@ -11,6 +23,21 @@ td, th {
     padding: 8px;
 }
 
+tr{
+    background-color: #fff;
+}
+
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #f9f9f9;
+}
+
+.footer{
+    text-align: center;
+    border-top: 1px solid white;
+    padding: 10px;
+    position: absolute;
+    bottom:0;
+    right:0;
+    left:0;
+
 }

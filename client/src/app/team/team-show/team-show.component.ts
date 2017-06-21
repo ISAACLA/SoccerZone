@@ -19,11 +19,11 @@ export class TeamShowComponent implements OnInit {
     this._route.params.subscribe((param)=>{
       this.team_id = param.id
     })
-    this.gettheteam(this.team_id)
+    this.getTeam(this.team_id)
   }
 
-  gettheteam(id){
-    this._teamService.gettheteam(id)
+  getTeam(id){
+    this._teamService.getTeam(id)
     .then( (response)=>this.team=response)
     .catch( (err)=>console.log(err) )
   }

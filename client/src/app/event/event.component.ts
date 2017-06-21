@@ -14,27 +14,27 @@ export class EventComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.allevents()
+    this.allEvents()
   }
 
-  newevent(formData){
-    this._eventService.newevent(formData.value)
+  newEvent(formData){
+    this._eventService.newEvent(formData.value)
     .then( (response)=>{
       formData.reset();
-      this.allevents()
+      this.allEvents()
      })
     .catch( (err)=>this.errors=err._body.split(","))
   }
 
-  allevents(){
-    this._eventService.allevents()
+  allEvents(){
+    this._eventService.allEvents()
     .then( (response)=>this.events=response)
     .catch( (err)=>console.log(err))
   }
 
-  joinevent(event_id){
-    this._eventService.joinevent(event_id)
-    .then( (response)=>this.allevents() )
+  joinEvent(event_id){
+    this._eventService.joinEvent(event_id)
+    .then( (response)=>this.allEvents() )
     .catch( (err)=>console.log(err) )
   }
 }

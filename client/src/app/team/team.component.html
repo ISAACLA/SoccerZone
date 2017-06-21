@@ -1,33 +1,66 @@
-<a href="/logout">Logout</a>
-<a [routerLink]="['/dashboard']">Go Back</a>
-<h2>This is the team page, user should seen the teams in the area as well as the new team form</h2>
+<div class="body">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" [routerLink]="['/dashboard']" >SoccerZone</a>
+        </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a [routerLink]="['/dashboard']">Home</a></li>
+            <li><a href="#">Events<span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Teams</a></li>
+            <li><a [routerLink]="['/profile']">Profile</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a [routerLink]="['/profile']" *ngIf='user'>{{ user.username }}</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
-<h3>Create a new team</h3>
-<form (submit)='newteam(formData)' #formData='ngForm'>
-  <label>Name: </label>
-  <input type="text" name="name" ngModel>
-  <label>Zipcoce: </label>
-  <input type="number" name="zipcode" ngModel>
-  <button>New Team</button>
-</form>
+    <div class="teams">
+        <h3>Create a new team</h3>
+        <form (submit)='newTeam(formData)' #formData='ngForm'>
+          <label>Name: </label>
+          <input type="text" name="name" ngModel>
+          <label>Zipcode: </label>
+          <input type="number" name="zipcode" ngModel>
+          <button class='btn btn-primary' type='submit'>New Team</button>
+        </form>
 
-<p *ngFor='let err of errors'>{{ err }}</p>
-<hr>
-<h3>All teams</h3>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Captain</th>
-    <th>Players</th>
-    <th>Zipcode</th>
-    <th>Action</th>
-  </tr>
-  <tr *ngFor='let team of teams'>
-    <td><a [routerLink]="['/team', team._id]">{{ team.name }}</a></td>
-    <td>{{ team._user.username }}</td>
-    <td>{{ team.players }}</td>
-    <td>{{ team.zipcode }}</td>
-    <td><button (click)='jointeam(team._id)'>Join</button></td>
-  </tr>
-</table>
+        <p *ngFor='let err of errors'>{{ err }}</p>
+        <hr>
+        <h3>All teams</h3>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Captain</th>
+            <th>Players</th>
+            <th>Zipcode</th>
+            <th>Action</th>
+          </tr>
+          <tr *ngFor='let team of teams'>
+            <td><a [routerLink]="['/team', team._id]">{{ team.name }}</a></td>
+            <td>{{ team._user.username }}</td>
+            <td>{{ team.players }}/18</td>
+            <td>{{ team.zipcode }}</td>
+            <td><button class="btn btn-success" (click)='joinTeam(team._id)'>Join</button></td>
+          </tr>
+        </table>
+
+        <div class="footer">
+            <h5>Briggs & Isaac</h5>
+            <p>SoccerZone.com © 2017 · All Rights Reserved</p>
+        </div>
+    </div>
+</div>

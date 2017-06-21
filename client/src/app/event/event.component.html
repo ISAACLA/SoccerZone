@@ -1,43 +1,74 @@
-<a href="/logout">Logout</a>
-<a [routerLink]="['/dashboard']">Go Back</a>
-<h2>This is the team page, user should seen the teams in the area as well as the new team form</h2>
+<div class="body">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" [routerLink]="['/dashboard']" >SoccerZone</a>
+        </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a [routerLink]="['/dashboard']">Home</a></li>
+            <li><a href="#">Events<span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Teams</a></li>
+            <li><a [routerLink]="['/profile']">Profile</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a [routerLink]="['/profile']" *ngIf='user'>{{ user.username }}</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
-<h3>Create a new event</h3>
-<form (submit)='newevent(formData)' #formData='ngForm'>
-  <label>Event</label>
-  <input type="text" name="events" ngModel>
-  <label>Zipcode</label>
-  <input type="number" name="zipcode" ngModel>
-  <label>Location</label>
-  <input type="text" name="location" ngModel>
-  <label>Date</label>
-  <input type="date" name="date" ngModel>
-  <label>Time</label>
-  <input type="time" name="time" ngModel>
-  <button>New Event</button>
-</form>
+    <h3>Create a new event</h3>
+    <form (submit)='newEvent(formData)' #formData='ngForm'>
+      <label>Event</label>
+      <input type="text" name="events" ngModel>
+      <label>Zipcode</label>
+      <input type="number" name="zipcode" ngModel>
+      <label>Location</label>
+      <input type="text" name="location" ngModel>
+      <label>Date</label>
+      <input type="date" name="date" ngModel>
+      <label>Time</label>
+      <input type="time" name="time" ngModel>
+      <button>New Event</button>
+    </form>
 
-<p *ngFor='let err of errors'>{{ err }}</p>
-<hr>
-<h3>All events</h3>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Hoster</th>
-    <th>Date</th>
-    <th>Time</th>
-    <th>Attendees</th>
-    <th>Zipcode</th>
-    <th>Action</th>
-  </tr>
-  <tr *ngFor='let event of events'>
-    <td><a [routerLink]="['/event', event._id]">{{ event.events }}</a></td>
-    <td>{{ event._user.username }}</td>
-    <td>{{ event.date | date:'yMMMd' }}</td>
-    <td>{{ event.time }}</td>
-    <td>{{ event.attendees.length }}</td>
-    <td>{{ event.zipcode }}</td>
-    <td><button (click)='joinevent(event._id)'>Join</button></td>
-  </tr>
-</table>
+    <p *ngFor='let err of errors'>{{ err }}</p>
+    <hr>
+    <h3>All events</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Hoster</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Attendees</th>
+        <th>Zipcode</th>
+        <th>Action</th>
+      </tr>
+      <tr *ngFor='let event of events'>
+        <td><a [routerLink]="['/event', event._id]">{{ event.events }}</a></td>
+        <td>{{ event._user.username }}</td>
+        <td>{{ event.date | date:'yMMMd' }}</td>
+        <td>{{ event.time }}</td>
+        <td>{{ event.attendees.length }}</td>
+        <td>{{ event.zipcode }}</td>
+        <td><button (click)='joinevent(event._id)'>Join</button></td>
+      </tr>
+    </table>
+
+    <div class="footer">
+        <h5>Briggs & Isaac</h5>
+        <p>SoccerZone.com © 2017 · All Rights Reserved</p>
+    </div>
+</div>

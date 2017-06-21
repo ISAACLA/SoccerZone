@@ -9,31 +9,31 @@ export class TeamService {
     private _http:Http
   ) { }
 
-  newteam(data){
+  newTeam(data){
     return this._http.post('/api/teams', data)
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
 
-  zipcodeteams(){
-    return this._http.get('/api/zipcodeteams')
+  zipcodeTeams(){
+    return this._http.get('/api/zipcodeTeams')
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
 
-  jointeam(id){
-    return this._http.get('/api/jointeam/'+id)
+  joinTeam(id){
+    return this._http.get('/api/joinTeam/'+id)
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
 
-  gettheteam(id){
-    return this._http.get('/api/theteam/'+id)
+  getTeam(id){
+    return this._http.get('/api/team/'+id)
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
 
-  allteams(){
+  allTeams(){
     return this._http.get('/api/teams')
     .map( (response:Response)=>response.json() )
     .toPromise()

@@ -18,11 +18,11 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentuser()
+    this.currentUser()
   }
 
-  currentuser(){
-    this. _reglogService.currentuser()
+  currentUser(){
+    this. _reglogService.currentUser()
     .then( (response)=>this.user=response )
     .catch( (err)=>this._router.navigate(['']) )
   }

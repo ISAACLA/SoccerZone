@@ -1,19 +1,58 @@
-<a href="/logout">Logout</a>
-<a [routerLink]="['/dashboard']">Go Back</a>
+<div class="body">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" [routerLink]="['/dashboard']">SoccerZone</a>
+        </div>
 
-<h2 *ngIf='event'>{{ event.events }}</h2>
-<h2 *ngIf='event'>{{ event.zipcide }}</h2>
-<h2 *ngIf='event'>Hoster: {{ event._user.username }}</h2>
-<div *ngIf='event'>
-  <ul *ngFor='let attendee of event.attendees'>
-    <li>{{ attendee.username }}</li>
-  </ul>
-  <!-- <h3 *ngFor='let attendee of event.attendees'> {{ attendee.username }}</h3> -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a [routerLink]="['/dashboard']">Home</a></li>
+            <li><a href="#">Events<span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Teams</a></li>
+            <li><a [routerLink]="['/profile']">Profile</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a [routerLink]="['/profile']" *ngIf='user'>{{ user.username }}</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div *ngIf='event' class="event">
+        <h1>{{ event.events }}</h1>
+        <div class="container">
+            <h4>Hosted by: {{ event._user.username }}</h4>
+            <h5>{{ event.date | date:'yMMMd' }} {{ event.time }} @ {{ event.location }}</h5>
+            <h5>Members attending:</h5>
+            <div class="list-group">
+                <button *ngFor='let attendee of event.attendees' type="button" class="list-group-item">{{ attendee.username }}</button>
+            </div>
+            <button class="btn btn-success" (click)='joinEvent(event._id)'>Join</button>
+        </div>
+    </div>
+    <div class="mapAndChat">
+        <h3>Location</h3>
+        <div id="googleMap"></div>
+
+        <div class="chatBox">
+            <h3>Message Board</h3>
+        </div>
+    </div>
+
+
+
+    <div class="footer">
+        <h5>Briggs & Isaac</h5>
+        <p>SoccerZone.com © 2017 · All Rights Reserved</p>
+    </div>
 </div>
-<h3 *ngIf='event'>{{ event.date | date:'yMMMd' }}</h3>
-<h3 *ngIf='event'>{{ event.time }}</h3>
-<h3 *ngIf='event'>{{ event.location }}</h3>
-<h3 *ngIf='event'>{{ event.zipcode }}</h3>
-
-<hr>
-<h3>Message Board</h3>

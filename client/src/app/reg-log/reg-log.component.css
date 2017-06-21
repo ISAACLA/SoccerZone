@@ -1,0 +1,29 @@
+.body{
+    height: 100%;
+    position: relative;
+    background: linear-gradient(white, gray);
+    padding-bottom: 600px;
+
+}
+.container{
+    position: absolute;
+    top: 20%;
+    left: 10%;
+}
+
+.alert-danger{
+    width: 200px;
+    margin: 2px;
+    display: inline-block;
+}
+
+.footer{
+    text-align: center;
+    border-top: 1px solid white;
+    padding: 10px;
+    position: absolute;
+    bottom:0;
+    right:0;
+    left:0;
+
+}

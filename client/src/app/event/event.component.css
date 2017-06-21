@@ -1,3 +1,7 @@
+.body{
+    height: 900px;
+    background: linear-gradient(white, #bbb);
+}
 
 table {
     font-family: arial, sans-serif;
@@ -13,4 +17,11 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+.footer{
+    text-align: center;
+    border-top: 1px solid white;
+    padding: 10px;
+
 }

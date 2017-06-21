@@ -1,0 +1,22 @@
+.body{
+    height: 100%;
+    background: linear-gradient(white, #bbb);
+}
+
+.list-group{
+    width: 300px;
+    margin-left: 40px;
+    padding: 3px;
+}
+
+.team{
+    margin-left: 30px;
+    display: inline-block;
+}
+
+.footer{
+    text-align: center;
+    border-top: 1px solid white;
+    padding: 10px;
+
+}

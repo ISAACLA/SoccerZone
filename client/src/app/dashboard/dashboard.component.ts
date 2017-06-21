@@ -21,38 +21,38 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentuser(),
-    this.zipcodeteams(),
-    this.zipcodeevents()
+    this.currentUser(),
+    this.zipcodeTeams(),
+    this.zipcodeEvents()
   }
 
-  currentuser(){
-    this. _reglogService.currentuser()
+  currentUser(){
+    this. _reglogService.currentUser()
     .then( (response)=>this.user=response )
     .catch( (err)=>this._router.navigate(['']) )
   }
 
-  zipcodeteams(){
-    this._teamService.zipcodeteams()
+  zipcodeTeams(){
+    this._teamService.zipcodeTeams()
     .then( (response)=>this.teams= response )
     .catch( (err)=>console.log(err) )
   }
 
-  zipcodeevents(){
-    this._eventService.zipcodeevents()
+  zipcodeEvents(){
+    this._eventService.zipcodeEvents()
     .then( (response)=>this.events=response )
     .catch( (err)=>console.log(err) )
   }
 
-  jointeam(team_id){
-    this._teamService.jointeam(team_id)
-    .then( (response)=>this.zipcodeteams() )
+  joinTeam(team_id){
+    this._teamService.joinTeam(team_id)
+    .then( (response)=>this.zipcodeTeams() )
     .catch( (err)=>console.log(err))
   }
 
-  joinevent(event_id){
-    this._eventService.joinevent(event_id)
-    .then( (respnose)=>this.zipcodeevents() )
+  joinEvent(event_id){
+    this._eventService.joinEvent(event_id)
+    .then( (respnose)=>this.zipcodeEvents() )
     .catch( (err)=>console.log(err))
   }
 }

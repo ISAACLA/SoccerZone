@@ -15,27 +15,27 @@ export class TeamComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.allteams()
+    this.allTeams()
   }
 
-  newteam(formData){
-    this._teamService.newteam(formData.value)
+  newTeam(formData){
+    this._teamService.newTeam(formData.value)
     .then( response=>{
       formData.reset();
-      this.allteams();
+      this.allTeams();
     } )
     .catch( (err)=>this.errors=err._body.split(","))
   }
 
-  allteams(){
-    this._teamService.allteams()
+  allTeams(){
+    this._teamService.allTeams()
     .then( (response)=>this.teams=response )
     .catch( (err)=>console.log(err) )
   }
 
-  jointeam(team_id){
-    this._teamService.jointeam(team_id)
-    .then( (response:Response)=>this.allteams() )
+  joinTeam(team_id){
+    this._teamService.joinTeam(team_id)
+    .then( (response:Response)=>this.allTeams() )
     .catch( (err)=>console.log(err))
   }
 }
