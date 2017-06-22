@@ -15,9 +15,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a [routerLink]="['/dashboard']">Home</a></li>
-            <li><a href="#">Events<span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Teams</a></li>
+            <li><a [routerLink]="['/events']">Events<span class="sr-only">(current)</span></a></li>
+            <li><a [routerLink]="['/teams']">Teams</a></li>
             <li><a [routerLink]="['/profile']">Profile</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -37,15 +36,38 @@
             <div class="list-group">
                 <button *ngFor='let attendee of event.attendees' type="button" class="list-group-item">{{ attendee.username }}</button>
             </div>
-            <button class="btn btn-success" (click)='joinEvent(event._id)'>Join</button>
+            <button class="btn btn-success" style="float: right" (click)='joinEvent(event._id)'>Join</button>
         </div>
     </div>
     <div class="mapAndChat">
         <h3>Location</h3>
         <div id="googleMap"></div>
 
-        <div class="chatBox">
-            <h3>Message Board</h3>
+        <div class="messageBoard">
+            <h4>Add your post here...</h4>
+            <form (submit)='newpost(formData, event._id)' #formData='ngForm'>
+              <textarea name="post" rows="3" cols="60" ngModel></textarea>
+              <br>
+              <button>Post</button>
+            </form>
+            <p *ngFor='let err of errors'> {{ err }}</p>
+            <hr>
+            <div *ngIf="event">
+              <div *ngFor="let p of event.posts">
+                <h4> <i>{{ p._user.username }}</i>: {{ p.post }}</h4>
+
+                <div *ngFor="let comment of p.comments">
+                  <h5> {{ comment._user.username }} - {{ comment.comment}}</h5>
+                </div>
+
+                <form (submit)='newcomment(formData, p._id)' #formData='ngForm'>
+                  <textarea name="comment" rows="2" cols="40" ngModel></textarea>
+                  <br>
+                  <button>Comment</button>
+                </form>
+                <p *ngFor='let err of commenterrors'> {{ err }}</p>
+              </div>
+           </div> 
         </div>
     </div>
 

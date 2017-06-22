@@ -9,14 +9,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SoccerZone</a>
+          <a class="navbar-brand" [routerLink]="['/dashboard']">SoccerZone</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="#">Events<span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Teams</a></li>
+            <li><a [routerLink]="['/events']">Events<span class="sr-only">(current)</span></a></li>
+            <li><a [routerLink]="['/teams']">Teams</a></li>
             <li><a [routerLink]="['/profile']">Profile</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -30,7 +30,7 @@
     <div class="jumbotron">
       <h1>This is Soccer Zone</h1>
       <p>Find Local Soccer Teams and Events</p>
-      <p><a [routerLink]="['/team']">Create New Team</a> or <a [routerLink]="['/event']">Create New Event</a></p>
+      <p><a [routerLink]="['/teams']">Create New Team</a> or <a [routerLink]="['/events']">Create New Event</a></p>
     </div>
 
     <div class="events">
@@ -54,7 +54,7 @@
             <td>Name</td>
             <td>Players</td>
             <td>Zipcode</td>
-            <td>Action</td>
+            <td>Join</td>
           </tr>
           <tr *ngFor='let team of teams'>
             <td><a [routerLink]="['/team',team._id]">{{ team.name }}</a></td>

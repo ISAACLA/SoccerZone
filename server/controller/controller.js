@@ -205,19 +205,21 @@ module.exports = {
       }
     })
   },
-
+  
   theevent: (req,res)=>{
-    Event.findOne({_id:req.params.id})
-    .populate('_user')
-    .populate({path:'attendees', populete:{path:'user'}})
-    .exec((err,theevent)=>{
-      if(err){
-        console.log(err)
-      }else{
-        return res.json(theevent)
-      }
-    })
-  },
+     Event.findOne({_id:req.params.id})
+     .populate('_user')
+     .populate({path:'attendees', populete:{path:'user'}})
+     .populate({path:'posts', populate:{path:'_user'}})
+     .populate({path:'posts', populate:{path:'_user'}, populate:{path:'comments',populate:{path:'_user'}}})
+     .exec((err,theevent)=>{
+       if(err){
+         console.log(err)
+       }else{
+         return res.json(theevent)
+       }
+     })
+   },
 
   allteams: (req,res)=>{
     Team.find({}).populate('_user').sort({zipcode:1}).exec((err,teams)=>{
@@ -237,6 +239,74 @@ module.exports = {
         return res.json(events)
       }
     })
+  },
+
+  newpost: (req,res)=>{
+    if(!req.session.user){
+      return res.status(500).send('No User')
+    }else{
+      let newpost = new Post (req.body);
+      newpost._event = req.params.id;
+      newpost._user = req.session.user._id;
+      newpost.save((err, savedpost)=>{
+        if(err){
+          let errors=""
+          for (let i in err.errors){
+            errors += err.errors[i].message+","
+          }
+          return res.status(500).send(errors)
+        }else{
+          Event.findOne({_id:req.params.id},(err,theevent)=>{
+            if(err){
+              console.log(err)
+            }else{
+              theevent.posts.push(savedpost)
+              theevent.save((err,savedevent)=>{
+                if(err){
+                  console.log(err)
+                }else{
+                  return res.json(savedpost)
+                }
+              })
+            }
+          })
+        }
+      })
+    }
+  },
+
+  newcomment: (req, res)=>{
+    if(!req.session.user){
+      return res.status(500).send("No User")
+    }else{
+      let newcommnet = new Comment (req.body)
+      newcommnet._post = req.params.id;
+      newcommnet._user = req.session.user._id
+      newcommnet.save((err,savedcomment)=>{
+        if(err){
+          let errors = ""
+          for (let i in err.errors){
+            errors += err.errors[i].message+","
+          }
+          return res.status(500).send(errors)
+        }else{
+          Post.findOne({_id:req.params.id},(err,thepost)=>{
+            if(err){
+              console.log(err)
+            }else{
+              thepost.comments.push(savedcomment);
+              thepost.save((err,savedpost)=>{
+                if(err){
+                  console.log(err)
+                }else{
+                  return res.json(savedcomment)
+                }
+              })
+            }
+          })
+        }
+      })
+    }
   },
 
 }

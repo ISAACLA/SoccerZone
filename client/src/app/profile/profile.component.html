@@ -1,5 +1,31 @@
-<a href="/logout">Logout</a>
-<a [routerLink]="['/dashboard']">Dashboard</a>
+<div class="body">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" [routerLink]="['/dashboard']" >SoccerZone</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a [routerLink]="['/events']">Events<span class="sr-only">(current)</span></a></li>
+            <li><a [routerLink]="['/teams']">Teams</a></li>
+            <li><a [routerLink]="['/profile']">Profile</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a [routerLink]="['/profile']" *ngIf='user'>{{ user.username }}</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 <h2 *ngIf='user'>{{ user.username}}'s' Profile</h2>
 <form (submit)='profile(formData)' #formData='ngForm'>
   <h3>Address: <input type="text" name="address" ngModel></h3>
@@ -66,3 +92,5 @@
   <h3><button>Submit</button></h3>
 </form>
 <p *ngFor='let err of errors'> {{ err }}</p>
+
+</div>
