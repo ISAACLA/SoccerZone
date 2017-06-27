@@ -41,6 +41,8 @@ let UserSchema = new Schema ({
     required:[true, "Zipcode is required"],
     length:[5,"Zipcode should have 5 digits exactly"]
   },
+  teams: [{type:Schema.Types.ObjectId, ref:"Team"}],
+  events: [{type:Schema.Types.ObjectId, ref:"Event"}],
   profiles: [{type:Schema.Types.ObjectId, ref: "Profile"}],
   // password_confirmation:
 }, {timestamps:true})
