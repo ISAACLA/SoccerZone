@@ -26,37 +26,6 @@ export class TeamShowComponent implements OnInit {
       this.team_id = param.id
     })
     this.getTeam(this.team_id)
-    var geocoder = new google.maps.Geocoder();
-    var position = {lat: 34.0522, lng: -118.2437}
-    var mapProp = {
-        center: new google.maps.LatLng(34.0522, -118.2437),
-        zoom: 11,
-        radius: 10000,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-    function codeAddress() {
-    var address = "91605";
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == 'OK') {
-        map.setCenter(results[0].geometry.location);
-        var cityCircle = new google.maps.Circle({
-              fillColor: '#2200CC',
-              fillOpacity: 0.35,
-              strokeWeight: 1,
-              strokeColor: '#2200CC',
-              strokeOpacity: 0.7,
-              map: map,
-              center: results[0].geometry.location,
-              radius: 4000
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-  }
-  codeAddress();
   }
 
   currentUser(){
@@ -67,7 +36,45 @@ export class TeamShowComponent implements OnInit {
 
   getTeam(id){
     this._teamService.getTeam(id)
-    .then( (response)=>this.team=response)
+    .then( (response)=>{
+        this.team=response;
+        this.generateMap(this.team.zipcode)
+    })
     .catch( (err)=>console.log(err) )
   }
+  generateMap(location){
+      var zip = location.toString();
+      var geocoder = new google.maps.Geocoder();
+      var position = {lat: 34.0522, lng: -118.2437}
+      var mapProp = {
+          center: new google.maps.LatLng(34.0522, -118.2437),
+          zoom: 11,
+          radius: 10000,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+      function codeAddress(location) {
+      var address = location;
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == 'OK') {
+          map.setCenter(results[0].geometry.location);
+          var cityCircle = new google.maps.Circle({
+                fillColor: '#2200CC',
+                fillOpacity: 0.35,
+                strokeWeight: 1,
+                strokeColor: '#2200CC',
+                strokeOpacity: 0.7,
+                map: map,
+                center: results[0].geometry.location,
+                radius: 4000
+          });
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+     }
+     console.log(zip);
+     codeAddress(zip)
+   }
 }

@@ -30,37 +30,6 @@ export class EventShowComponent implements OnInit {
     })
     this.getEvent(this.event_id)
     this.currentUser()
-    var geocoder = new google.maps.Geocoder();
-    var position = {lat: 34.0522, lng: -118.2437}
-    var mapProp = {
-        center: new google.maps.LatLng(34.0522, -118.2437),
-        zoom: 11,
-        radius: 10000,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-    function codeAddress() {
-    var address = "91605";
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == 'OK') {
-        map.setCenter(results[0].geometry.location);
-        var cityCircle = new google.maps.Circle({
-              fillColor: '#2200CC',
-              fillOpacity: 0.35,
-              strokeWeight: 1,
-              strokeColor: '#2200CC',
-              strokeOpacity: 0.7,
-              map: map,
-              center: results[0].geometry.location,
-              radius: 4000
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-  }
-  codeAddress();
   }
 
   currentUser(){
@@ -71,7 +40,10 @@ export class EventShowComponent implements OnInit {
 
   getEvent(id){
     this._eventService.getEvent(id)
-    .then( (event)=>this.event=event)
+    .then( (event)=>{
+        this.event=event;
+        this.generateMap(this.event.location)
+    })
     .catch( (err)=>console.log(err) )
   }
 
@@ -98,4 +70,35 @@ export class EventShowComponent implements OnInit {
    .catch( (err)=>this.commentErrors= err._body.split(",") )
  }
 
+ generateMap(location){
+     var zip = location.location.toString();
+     var event = location.events.toString();
+     var geocoder = new google.maps.Geocoder();
+     var position = {lat: 34.0522, lng: -118.2437}
+     var mapProp = {
+         center: new google.maps.LatLng(34.0522, -118.2437),
+         zoom: 11,
+         radius: 10000,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+     };
+     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+     function codeAddress(location, name) {
+     var address = location;
+     geocoder.geocode( { 'address': address}, function(results, status) {
+       if (status == 'OK') {
+         map.setCenter(results[0].geometry.location);
+         var cityMarker = new google.maps.Marker({
+               map: map,
+               position: results[0].geometry.location,
+               title: name,
+         });
+       } else {
+         alert('Geocode was not successful for the following reason: ' + status);
+       }
+     });
+    }
+    console.log(zip, event);
+    codeAddress(zip, event);
+  }
 }
