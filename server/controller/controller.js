@@ -164,7 +164,23 @@ module.exports = {
             if(err){
               console.log(err)
             }else{
-              return res.json(savedteam)
+              //
+              User.findOne({_id:req.session.user._id},(err,theuser)=>{
+                if(err){
+                  console.log(err)
+                }else{
+                  theuser.teams.push(savedteam)
+                  theuser.save((err,saveduser)=>{
+                    if(err){
+                      console.log(err)
+                    }else{
+                      return res.json(savedteam)
+                    }
+                  })
+                }
+              })
+              //
+              // return res.json(savedteam)
             }
           })
         }
@@ -178,14 +194,29 @@ module.exports = {
     }else{
       Event.findOne({_id:req.params.id},(err,theevent)=>{
         if(err){
-          console.log(err)
+          console.log("first",err)
         }else{
           theevent.attendees.push(req.session.user);
           theevent.save( (err,savedevent)=>{
             if(err){
-              console.log(err)
+              console.log("second",err)
             }else{
-              return res.json(savedevent)
+              //
+              User.findOne({_id:req.session.user._id},(err,theuser)=>{
+                if(err){
+                  console.log("third",err)
+                }else{
+                  theuser.events.push(savedevent)
+                  theuser.save((err,saveduser)=>{
+                    if(err){
+                      console.log("forth",err)
+                    }else{
+                      return res.json(savedevent)
+                    }
+                  })
+                }
+              })
+              // return res.json(savedevent)
             }
           })
         }
@@ -205,7 +236,7 @@ module.exports = {
       }
     })
   },
-  
+
   theevent: (req,res)=>{
      Event.findOne({_id:req.params.id})
      .populate('_user')

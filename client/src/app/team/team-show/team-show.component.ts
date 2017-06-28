@@ -70,4 +70,10 @@ export class TeamShowComponent implements OnInit {
     .then( (response)=>this.team=response)
     .catch( (err)=>console.log(err) )
   }
+
+  joinTeam(team_id){
+    this._teamService.joinTeam(team_id)
+    .then( (response:Response)=>this.getTeam(this.team_id) )
+    .catch( (err)=>console.log(err))
+  }
 }

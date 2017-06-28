@@ -77,7 +77,7 @@ export class EventShowComponent implements OnInit {
 
   joinEvent(event_id){
     this._eventService.joinEvent(event_id)
-    .then( (response)=>this.getEvent(event) )
+    .then( (response)=>this.getEvent(this.event_id) )
     .catch( (err)=>console.log(err))
   }
 
