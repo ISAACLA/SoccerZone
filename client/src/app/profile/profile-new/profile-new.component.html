@@ -1,0 +1,132 @@
+<form (submit)='profile(formData)' #formData='ngForm'>
+  <h3>Address: <input type="text" name="address" ngModel></h3>
+  <h3>City: <input type="text" name="city" ngModel></h3>
+  <h3>
+    State:
+    <select name="state" ngModel>
+      <option value="AL">AL</option>
+      <option value="AK">AK</option>
+      <option value="AZ">AZ</option>
+      <option value="AR">AR</option>
+      <option value="CA">CA</option>
+      <option value="CO">CO</option>
+      <option value="CT">CT</option>
+      <option value="DE">DE</option>
+      <option value="DC">DC</option>
+      <option value="FL">FL</option>
+      <option value="GA">GA</option>
+      <option value="HI">HI</option>
+      <option value="ID">ID</option>
+      <option value="IL">IL</option>
+      <option value="IN">IN</option>
+      <option value="IA">IA</option>
+      <option value="KS">KS</option>
+      <option value="KY">KY</option>
+      <option value="LA">LA</option>
+      <option value="ME">ME</option>
+      <option value="MD">MD</option>
+      <option value="MA">MA</option>
+      <option value="MI">MI</option>
+      <option value="MN">MN</option>
+      <option value="MS">MS</option>
+      <option value="MO">MO</option>
+      <option value="MT">MT</option>
+      <option value="NE">NE</option>
+      <option value="NV">NV</option>
+      <option value="NH">NH</option>
+      <option value="NJ">NJ</option>
+      <option value="NM">NM</option>
+      <option value="NY">NY</option>
+      <option value="NC">NC</option>
+      <option value="ND">ND</option>
+      <option value="OH">OH</option>
+      <option value="OK">OK</option>
+      <option value="OR">OR</option>
+      <option value="PA">PA</option>
+      <option value="RI">RI</option>
+      <option value="SC">SC</option>
+      <option value="SD">SD</option>
+      <option value="TN">TN</option>
+      <option value="TX">TX</option>
+      <option value="UT">UT</option>
+      <option value="VT">VT</option>
+      <option value="VA">VA</option>
+      <option value="WA">WA</option>
+      <option value="WV">WV</option>
+      <option value="WI">WI</option>
+      <option value="WY">WY</option>
+    </select>
+  </h3>
+  <h3>Age: <input type="number" name="age" ngModel></h3>
+  <h3>Gender:
+    <input type="radio" name="gender" value="Male" ngModel> Male
+    <input type="radio" name="gender" value="Female" ngModel> Female
+  </h3>
+  <h3>Favorite Player: <input type="text" name="favplayer" ngModel></h3>
+  <h3>Favorite Team: <input type="text" name="favteam" ngModel></h3>
+  <h3>Preferred Position 1:
+    <select name="position1">
+      <option value="GK">GK</option>
+      <option value="CB">CB</option>
+      <option value="LCB">LCB</option>
+      <option value="RCB">RCB</option>
+      <option value="LB">LB</option>
+      <option value="RB">RB</option>
+      <option value="CM">CM</option>
+      <option value="LDM">LDM</option>
+      <option value="RDM">RDM</option>
+      <option value="CDM">CDM</option>
+      <option value="CAM">CAM</option>
+      <option value="LM">LM</option>
+      <option value="RM">RM</option>
+      <option value="ST">ST</option>
+      <option value="CF">CF</option>
+      <option value="LW">LW</option>
+      <option value="RW">RW</option>
+    </select>
+  </h3>
+  <h3>Preferred Position 2:
+    <select name="position2">
+      <option value="GK">GK</option>
+      <option value="CB">CB</option>
+      <option value="LCB">LCB</option>
+      <option value="RCB">RCB</option>
+      <option value="LB">LB</option>
+      <option value="RB">RB</option>
+      <option value="CM">CM</option>
+      <option value="LDM">LDM</option>
+      <option value="RDM">RDM</option>
+      <option value="CDM">CDM</option>
+      <option value="CAM">CAM</option>
+      <option value="LM">LM</option>
+      <option value="RM">RM</option>
+      <option value="ST">ST</option>
+      <option value="CF">CF</option>
+      <option value="LW">LW</option>
+      <option value="RW">RW</option>
+    </select>
+  </h3>
+  <h3>Preferred Position 3:
+    <select name="position3">
+      <option value="GK">GK</option>
+      <option value="CB">CB</option>
+      <option value="LCB">LCB</option>
+      <option value="RCB">RCB</option>
+      <option value="LB">LB</option>
+      <option value="RB">RB</option>
+      <option value="CM">CM</option>
+      <option value="LDM">LDM</option>
+      <option value="RDM">RDM</option>
+      <option value="CDM">CDM</option>
+      <option value="CAM">CAM</option>
+      <option value="LM">LM</option>
+      <option value="RM">RM</option>
+      <option value="ST">ST</option>
+      <option value="CF">CF</option>
+      <option value="LW">LW</option>
+      <option value="RW">RW</option>
+    </select>
+  </h3>
+  <h3><button>Submit</button></h3>
+</form>
+<p *ngFor='let err of errors'> {{ err }}</p>

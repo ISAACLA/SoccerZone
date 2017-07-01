@@ -15,7 +15,7 @@ export class EventShowComponent implements OnInit {
   event:any;
   event_id: String;
   errors:any;
-  commentErrors:any;
+  commenterrors:any;
 
   constructor(
     private _reglogService: RegLogService,
@@ -95,7 +95,7 @@ export class EventShowComponent implements OnInit {
      this.getEvent(this.event_id );
      formData.reset()
    })
-   .catch( (err)=>this.commentErrors= err._body.split(",") )
+   .catch( (err)=>this.commenterrors= err._body.split(",") )
  }
 
 }

@@ -30,7 +30,7 @@
         <h2>{{ team.name }}</h2>
         <h4>Number of Players: {{ team.players }}/18</h4>
         <div class='list-group'>
-          <button type="button" class="list-group-item" *ngFor='let player of team.squad'>{{ player.username }}</button>
+          <button type="button" class="list-group-item" *ngFor='let player of team.squad'><a [routerLink]="['/profile',player._id]">{{ player.username }}</a></button>
         </div>
     <button *ngIf='team.players === 18' disabled class="btn btn-success" style="float: right" (click)='joinTeam(team._id)'>Full</button>
     <button *ngIf='team.players !== 18' class="btn btn-success" style="float: right" (click)='joinTeam(team._id)'>Join</button>
@@ -40,13 +40,40 @@
         <h3>Location</h3>
         <div id="googleMap"></div>
 
-        <div class="chatBox">
+        <!-- <div class="chatBox">
             <div class="chatTitle">
                 <h3 *ngIf="team">Chat Room</h3>
             </div>
 
-        </div>
+        </div> -->
     </div>
+
+    <div class="messageBoard">
+      <h4>Add your post here...</h4>
+      <form (submit)='teampost(formData, team._id)' #formData='ngForm'>
+        <textarea name="post" rows="3" cols="60" ngModel></textarea>
+        <br>
+        <button>Post</button>
+      </form>
+      <p *ngFor='let err of errors'> {{ err }}</p>
+      <hr>
+      <div *ngIf="team">
+        <div *ngFor="let p of team.posts">
+          <h4> <i>{{ p._user.username }}</i>: {{ p.post }}</h4>
+
+          <div *ngFor="let comment of p.comments">
+            <h5> {{ comment._user.username }} - {{ comment.comment}}</h5>
+          </div>
+
+          <form (submit)='teamcomment(formData, p._id)' #formData='ngForm'>
+            <textarea name="comment" rows="2" cols="40" ngModel></textarea>
+            <br>
+            <button>Comment</button>
+          </form>
+          <p *ngFor='let err of commenterrors'> {{ err }}</p>
+        </div>
+     </div>
+   </div>
 
     <div class="footer">
         <h5>Briggs & Isaac</h5>

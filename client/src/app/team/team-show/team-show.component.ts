@@ -14,6 +14,8 @@ export class TeamShowComponent implements OnInit {
   user: any;
   team: any;
   team_id: String;
+  errors: any;
+  commenterrors: any;
   constructor(
     private _teamService:TeamService,
     private _reglogService:RegLogService,
@@ -75,5 +77,23 @@ export class TeamShowComponent implements OnInit {
     this._teamService.joinTeam(team_id)
     .then( (response:Response)=>this.getTeam(this.team_id) )
     .catch( (err)=>console.log(err))
+  }
+
+  teampost(formData,team_id){
+    this._teamService.teampost(formData.value, team_id)
+    .then( (response)=>{
+      this.getTeam(this.team_id);
+      formData.reset()
+    })
+    .catch( (err)=>this.errors=err._body.split(","))
+  }
+
+  teamcomment(formData,p_id){
+    this._teamService.teamcomment(formData.value, p_id)
+    .then( (response)=>{
+      this.getTeam(this.team_id);
+      formData.reset()
+    })
+    .catch( (err)=>this.commenterrors=err._body.split(",") )
   }
 }

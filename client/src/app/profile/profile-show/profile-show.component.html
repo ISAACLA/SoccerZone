@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" [routerLink]="['/dashboard']" >SoccerZone</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a [routerLink]="['/events']">Events<span class="sr-only">(current)</span></a></li>
+        <li><a [routerLink]="['/teams']">Teams</a></li>
+        <li><a [routerLink]="['/profile']">Profile</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a [routerLink]="['/profile']" *ngIf='user'>{{ user.username }}</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="userinfo">
+  <h3 *ngIf='profileuser'> Username: {{ profileuser.username }}</h3>
+  <h3 *ngIf='profileuser'> First Name: {{ profileuser.first_name }}</h3>
+  <h3 *ngIf='profileuser'> Last Name: {{ profileuser.last_name }}</h3>
+  <h3 *ngIf='profileuser'> Email: {{ profileuser.email }}</h3>
+  <h3 *ngIf='profileuser'> Zipcode: {{ profileuser.zipcode }}</h3>
+</div>
+
+<div class="userprofile">
+  <h4 *ngIf='profileuser'> My Address: {{ profileuser.city }}</h4>
+</div>
+
+<h4 *ngIf='profileuser'> {{ profileuser.username }}'s teams</h4>
+<div *ngIf='profileuser'>
+    <ul *ngFor='let team of profileuser.teams'>
+      <div class="userteam">
+        <li><a [routerLink]="['/team',team._id]">{{ team.name }}</a></li>
+      </div>
+    </ul>
+</div>
+
+<h4 *ngIf='profileuser'> {{ profileuser.username }}'s events</h4>
+<div *ngIf='profileuser'>
+  <ul *ngFor='let event of profileuser.events'>
+    <div class="userevent">
+      <li><a [routerLink]="['/event', event._id]">{{ event.events }}</a> </li>
+      <li>{{ event.location }}</li>
+      <li>{{ event.city }}</li>
+      <li>{{ event.state }}</li>
+      <li>{{ event.zipcode }}</li>
+      <li>{{ event.date }}</li>
+      <li>{{ event.time }}</li>
+    </div>
+  </ul>
+</div>

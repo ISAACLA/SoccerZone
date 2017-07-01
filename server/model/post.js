@@ -7,6 +7,7 @@ let PostSchema = new Schema ({
   dislikes: {type: Number, default:0},
   comments: [{type:Schema.Types.ObjectId, ref:"Comment"}],
   _event: {type:Schema.Types.ObjectId, ref:"Event"},
+  _team: {type:Schema.Types.ObjectId, ref:"Team"},
   _user: {type:Schema.Types.ObjectId, ref:"User"}
 }, {timestamps:true})
 

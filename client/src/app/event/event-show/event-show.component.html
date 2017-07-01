@@ -31,10 +31,11 @@
         <h1>{{ event.events }}</h1>
         <div class="container">
             <h4>Hosted by: {{ event._user.username }}</h4>
-            <h5>{{ event.date | date:'yMMMd' }} {{ event.time }} @ {{ event.location }}</h5>
+            <h5>{{ event.location}}, {{ event.location2}}, {{ event.city }}, {{ event.state }} {{ event.zipcode }}</h5>
+            <h5>{{ event.date | date:'yMMMd' }} {{ event.time }}</h5>
             <h5>Members attending:</h5>
             <div class="list-group">
-                <button *ngFor='let attendee of event.attendees' type="button" class="list-group-item">{{ attendee.username }}</button>
+                <button *ngFor='let attendee of event.attendees' type="button" class="list-group-item"><a [routerLink]="['/profile',attendee._id]">{{ attendee.username }}</a></button>
             </div>
             <button class="btn btn-success" style="float: right" (click)='joinEvent(event._id)'>Join</button>
         </div>
@@ -67,7 +68,7 @@
                 </form>
                 <p *ngFor='let err of commenterrors'> {{ err }}</p>
               </div>
-           </div> 
+           </div>
         </div>
     </div>
 
