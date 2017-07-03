@@ -1,7 +1,10 @@
 .body{
     height: 100%;
     position: relative;
-    background: linear-gradient(white, #ccf);
+    background:"../assets/stadium.jpg";
+    background-repeat: no-repeat;
+    background-color: black;
+    color: white;
     padding-bottom: 600px;
 
 }

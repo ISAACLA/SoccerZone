@@ -42,7 +42,7 @@ export class EventShowComponent implements OnInit {
     this._eventService.getEvent(id)
     .then( (event)=>{
         this.event=event;
-        this.generateMap(this.event.location)
+        this.generateMap(this.event.zipcode)
     })
     .catch( (err)=>console.log(err) )
   }
@@ -71,8 +71,7 @@ export class EventShowComponent implements OnInit {
  }
 
  generateMap(location){
-     var zip = location.location.toString();
-     var event = location.events.toString();
+     var zip = location.toString();
      var geocoder = new google.maps.Geocoder();
      var position = {lat: 34.0522, lng: -118.2437}
      var mapProp = {
@@ -83,7 +82,7 @@ export class EventShowComponent implements OnInit {
      };
      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-     function codeAddress(location, name) {
+     function codeAddress(location) {
      var address = location;
      geocoder.geocode( { 'address': address}, function(results, status) {
        if (status == 'OK') {
@@ -98,7 +97,7 @@ export class EventShowComponent implements OnInit {
        }
      });
     }
-    console.log(zip, event);
-    codeAddress(zip, event);
+    console.log(zip);
+    codeAddress(zip);
   }
 }

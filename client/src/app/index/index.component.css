@@ -15,6 +15,11 @@
     margin: 40px 100px 0px 100px;
 }
 
+.carousel{
+    width: 700px;
+    height: 400px;
+}
+
 .list-group-item{
     background: linear-gradient(-90deg, pink, lightblue);
     font-size: 28px;

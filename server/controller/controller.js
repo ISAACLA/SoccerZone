@@ -10,7 +10,7 @@ let Comment = mongoose.model("Comment");
 module.exports = {
   register: (req, res)=>{
     User.findOne({email:req.body.email}, (err, theuser)=>{
-      if(theuser == null){
+      if(theuser === null){
         let newuser = new User (req.body);
         newuser.save((err,saveduser)=>{
           if(err){
@@ -29,12 +29,12 @@ module.exports = {
   },
 
   login: (req, res)=>{
-    User.findOne({username:req.body.username},(err,theuser)=>{
-      if(theuser == null){
-        return res.status(500).send("No such a username")
+    User.findOne({username:req.body.username},(err, user)=>{
+      if(user === null){
+        return res.status(500).send("Username does not exist.")
       }else{
-        req.session.user = theuser
-        return res.json(theuser)
+        req.session.user = user
+        return res.json(user)
       }
     })
   },
@@ -176,12 +176,18 @@ module.exports = {
     if(!req.session.user){
       return res.status(500).send("No User")
     }else{
-      Event.findOne({_id:req.params.id},(err,theevent)=>{
+      Event.findOne({_id:req.params.id},(err, theEvent)=>{
         if(err){
           console.log(err)
         }else{
-          theevent.attendees.push(req.session.user);
-          theevent.save( (err,savedevent)=>{
+          for(var i = 0; i<theEvent.attendees.length; i++){
+            console.log(theEvent)
+            if(theEvent.attendees[i] === req.session.user){
+                return res.status(500).send("User Already Attending")
+            }
+          }
+          theEvent.attendees.push(req.session.user);
+          theEvent.save( (err,savedevent)=>{
             if(err){
               console.log(err)
             }else{
@@ -205,7 +211,7 @@ module.exports = {
       }
     })
   },
-  
+
   theevent: (req,res)=>{
      Event.findOne({_id:req.params.id})
      .populate('_user')
