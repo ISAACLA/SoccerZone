@@ -13,7 +13,9 @@ declare var google: any;
 export class TeamShowComponent implements OnInit {
   user: any;
   team: any;
-  team_id: String;
+  team_id: string;
+  errors: any;
+  commenterrors: any;
   constructor(
     private _teamService:TeamService,
     private _reglogService:RegLogService,
@@ -26,6 +28,7 @@ export class TeamShowComponent implements OnInit {
       this.team_id = param.id
     })
     this.getTeam(this.team_id)
+    this.currentUser()
   }
 
   currentUser(){
@@ -42,6 +45,7 @@ export class TeamShowComponent implements OnInit {
     })
     .catch( (err)=>console.log(err) )
   }
+
   generateMap(location){
       var zip = location.toString();
       var geocoder = new google.maps.Geocoder();
@@ -74,7 +78,40 @@ export class TeamShowComponent implements OnInit {
         }
       });
      }
-     console.log(zip);
      codeAddress(zip)
-   }
+  }
+
+  joinTeam(team_id){
+    this._teamService.joinTeam(team_id)
+    .then( (response:Response)=>this.getTeam(this.team_id) )
+    .catch( (err)=>console.log(err))
+  }
+
+  teampost(formData,team_id){
+    this._teamService.teampost(formData.value, team_id)
+    .then( (response)=>{
+      this.getTeam(this.team_id);
+      formData.reset()
+    })
+    .catch( (err)=>this.errors=err._body.split(","))
+  }
+
+  teamcomment(formData,p_id){
+    this._teamService.teamcomment(formData.value, p_id)
+    .then( (response)=>{
+      this.getTeam(this.team_id);
+      formData.reset()
+    })
+    .catch( (err)=>this.commenterrors=err._body.split(",") )
+  }
+
+  containsUser(user, squad) {
+    for (var i = 0; i < squad.length; i++) {
+        if (squad[i].username === user.username) {
+            return true;
+        }
+    }
+    return false;
+  }
+
 }

@@ -27,39 +27,43 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    <div class="teams">
-        <h3>Create a new team</h3>
-        <form (submit)='newTeam(formData)' #formData='ngForm'>
-          <label>Name: </label>
-          <input type="text" name="name" ngModel>
-          <label>Zipcode: </label>
-          <input type="number" name="zipcode" ngModel>
-          <button class='btn btn-primary' type='submit'>New Team</button>
-        </form>
-
-        <p *ngFor='let err of errors'>{{ err }}</p>
-        <hr>
-        <h3>All teams</h3>
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Captain</th>
-            <th>Players</th>
-            <th>Zipcode</th>
-            <th>Action</th>
-          </tr>
-          <tr *ngFor='let team of teams'>
-            <td><a [routerLink]="['/team', team._id]">{{ team.name }}</a></td>
-            <td>{{ team._user.username }}</td>
-            <td>{{ team.players }}/18</td>
-            <td>{{ team.zipcode }}</td>
-            <td><button class="btn btn-success" (click)='joinTeam(team._id)'>Join</button></td>
-          </tr>
-        </table>
-
-        <div class="footer">
-            <h5>Briggs & Isaac</h5>
-            <p>SoccerZone.com © 2017 · All Rights Reserved</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Create a New Team</h2>
+                <form (submit)='newTeam(formData)' #formData='ngForm'>
+                  <label>Name: </label>
+                  <input type="text" name="name" ngModel>
+                  <label>Zipcode: </label>
+                  <input type="number" name="zipcode" ngModel>
+                  <button class='btn btn-primary' type='submit'>New Team</button>
+                </form>
+            </div>
         </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <p *ngFor='let err of errors'>{{ err }}</p>
+                <hr>
+                <h2>All Teams</h2>
+                <table>
+                  <tr>
+                    <th>Name</th>
+                    <th>Captain</th>
+                    <th>Players</th>
+                    <th>Zipcode</th>
+                  </tr>
+                  <tr *ngFor='let team of teams'>
+                    <td><a [routerLink]="['/team', team._id]">{{ team.name }}</a></td>
+                    <td>{{ team._user.username }}</td>
+                    <td>{{ team.players }}/18</td>
+                    <td>{{ team.zipcode }}</td>        
+                  </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <h5>Briggs & Isaac</h5>
+        <p>SoccerZone © 2017 · All Rights Reserved</p>
     </div>
 </div>

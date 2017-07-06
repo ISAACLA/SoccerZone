@@ -14,4 +14,16 @@ export class ProfileService {
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
+
+  getProfile(id){
+    return this._http.get('/api/theuser/'+id)
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
+
+  myactivities(){
+    return this._http.get('/api/myactivities')
+    .map( (response:Response)=>response.json())
+    .toPromise()
+  }
 }

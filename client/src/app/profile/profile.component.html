@@ -26,71 +26,52 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-<h2 *ngIf='user'>{{ user.username}}'s' Profile</h2>
-<form (submit)='profile(formData)' #formData='ngForm'>
-  <h3>Address: <input type="text" name="address" ngModel></h3>
-  <h3>City: <input type="text" name="city" ngModel></h3>
-  <h3>
-    State:
-    <select name="state" ngModel>
-      <option value="AL">AL</option>
-      <option value="AK">AK</option>
-      <option value="AZ">AZ</option>
-      <option value="AR">AR</option>
-      <option value="CA">CA</option>
-      <option value="CO">CO</option>
-      <option value="CT">CT</option>
-      <option value="DE">DE</option>
-      <option value="DC">DC</option>
-      <option value="FL">FL</option>
-      <option value="GA">GA</option>
-      <option value="HI">HI</option>
-      <option value="ID">ID</option>
-      <option value="IL">IL</option>
-      <option value="IN">IN</option>
-      <option value="IA">IA</option>
-      <option value="KS">KS</option>
-      <option value="KY">KY</option>
-      <option value="LA">LA</option>
-      <option value="ME">ME</option>
-      <option value="MD">MD</option>
-      <option value="MA">MA</option>
-      <option value="MI">MI</option>
-      <option value="MN">MN</option>
-      <option value="MS">MS</option>
-      <option value="MO">MO</option>
-      <option value="MT">MT</option>
-      <option value="NE">NE</option>
-      <option value="NV">NV</option>
-      <option value="NH">NH</option>
-      <option value="NJ">NJ</option>
-      <option value="NM">NM</option>
-      <option value="NY">NY</option>
-      <option value="NC">NC</option>
-      <option value="ND">ND</option>
-      <option value="OH">OH</option>
-      <option value="OK">OK</option>
-      <option value="OR">OR</option>
-      <option value="PA">PA</option>
-      <option value="RI">RI</option>
-      <option value="SC">SC</option>
-      <option value="SD">SD</option>
-      <option value="TN">TN</option>
-      <option value="TX">TX</option>
-      <option value="UT">UT</option>
-      <option value="VT">VT</option>
-      <option value="VA">VA</option>
-      <option value="WA">WA</option>
-      <option value="WV">WV</option>
-      <option value="WI">WI</option>
-      <option value="WY">WY</option>
-    </select>
-  </h3>
-  <h3>Age: <input type="number" name="age" ngModel></h3>
-  <h3>Favorite Player: <input type="text" name="favplayer" ngModel></h3>
-  <h3>Favorite Team: <input type="text" name="favteam" ngModel></h3>
-  <h3><button>Submit</button></h3>
-</form>
-<p *ngFor='let err of errors'> {{ err }}</p>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-xs-12 col-sm-3">
+              <img src="./../../../assets/profilePic.jpg" alt="">
+          </div>
+          <div *ngIf='user' class="col-xs-12 col-sm-9">
+              <h4>Username: {{ user.username}}</h4>
+              <h4>First Name: {{ user.first_name}}</h4>
+              <h4>Last Name: {{ user.last_name}}</h4>
+              <h4>Email: {{ user.email}}</h4>
+              <h4 *ngIf="profile"> My Address: {{ profile.address }} </h4>
+              <h4 *ngIf="profile"> My Age: {{ profile.age }} </h4>
+              <h4 *ngIf="profile"> My Gender: {{ profile.gender }} </h4>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-xs-12 col-sm-6">
+              <div *ngIf="profile" class='myteam'>
+                <h5>My Teams</h5>
+                <ul *ngFor='let team of profile.teams'>
+                  <li><a [routerLink]="['/team', team._id]">{{ team.name }}</a> </li>
+                </ul>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+              <div *ngIf="profile" class='myevents'>
+                <h5>My Events</h5>
+                <div *ngFor='let event of profile.events'>
+                  <h4><a [routerLink]="['/event', event._id]">{{ event.events }}</a></h4>
+                  <p>{{ event.location }}</p>
+                  <p>{{ event.date | date: 'mediumDate' }}</p>
+                  <p>{{ event.time }}</p>
+              </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <button><a [routerLink]="['profile-new']">Complete my Profile</a></button>
+  <div class="profileform">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="footer">
+      <h5>Briggs & Isaac</h5>
+      <p>SoccerZone © 2017 · All Rights Reserved</p>
+  </div>
 
 </div>

@@ -10,7 +10,8 @@ import { Router } from '@angular/router'
 })
 export class ProfileComponent implements OnInit {
   user: any;
-  errors: any;
+  // errors: any;
+  profile: any;
   constructor(
     private _reglogService: RegLogService,
     private _router:Router,
@@ -19,17 +20,22 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser()
+    this.myActivities()
   }
 
   currentUser(){
     this. _reglogService.currentUser()
-    .then( (response)=>this.user=response )
+    .then( (response)=>{
+        this.user=response
+        console.log(this.user)
+    })
     .catch( (err)=>this._router.navigate(['']) )
   }
 
-  profile(formData){
-    this._profileService.profile(formData.value)
-    .then( (response)=>console.log(response) )
-    .catch( (err)=>this.errors=err._body.split(",") )
+  myActivities(){
+    this._profileService.myactivities()
+    .then( (response)=>this.profile = response )
+    .catch( (err)=>console.log(err) )
   }
+
 }

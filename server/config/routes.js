@@ -5,8 +5,10 @@ module.exports=(app)=>{
   app.post('/api/login', controller.login)
   app.get('/logout', controller.logout)
   app.get('/api/currentUser', controller.currentuser)
+  app.get('/api/myactivities', controller.myactivities)
 
   app.post('/api/profile', controller.newprofile)
+  app.get('/api/theuser/:id', controller.usershowprofile)
 
   app.post('/api/teams', controller.newteam)
   app.get('/api/zipcodeTeams', controller.zipcodeteams)
@@ -22,5 +24,8 @@ module.exports=(app)=>{
 
   app.post('/api/posts/:id', controller.newpost)
   app.post('/api/comments/:id', controller.newcomment)
+
+  app.post('/api/teamposts/:id', controller.teampost)
+  app.post('/api/teamcomments/:id', controller.teamcomment)
 
 }

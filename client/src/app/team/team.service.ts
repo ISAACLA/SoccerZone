@@ -38,4 +38,16 @@ export class TeamService {
     .map( (response:Response)=>response.json() )
     .toPromise()
   }
+
+  teampost(data,teamid){
+    return this._http.post('/api/teamposts/'+teamid, data)
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
+
+  teamcomment(data,pid){
+    return this._http.post('/api/teamcomments/'+pid, data)
+    .map( (response:Response)=>response.json() )
+    .toPromise()
+  }
 }

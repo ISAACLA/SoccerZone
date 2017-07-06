@@ -1,13 +1,23 @@
 .body{
     height: 100%;
     position: relative;
-    background: linear-gradient(white, #ccf);
+    background: url('./../../assets/stadium.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
     padding-bottom: 200px;
+}
+
+.navbar{
+    background-color: rgba(255,255,255,0.7);
+    border: none;
+    border-radius: 0px;
 }
 
 #banner{
     padding: 30px;
-    background: linear-gradient(-90deg, pink, lightblue);
+    background: linear-gradient(-90deg, lightblue, rgba(170, 230, 170, 0.7), lightblue);
 }
 
 #info{
@@ -21,14 +31,16 @@
 }
 
 .list-group-item{
-    background: linear-gradient(-90deg, pink, lightblue);
+    background: linear-gradient(-90deg, lightblue, rgba(170, 230, 170, 0.7), lightblue);
     font-size: 28px;
     font-weight: 200;
     padding: 50px;
+    text-align: center;
 }
 
 .footer{
     text-align: center;
+    background: rgba(255,255,255,0.2);
     border-top: 1px solid white;
     padding: 10px;
     position: absolute;

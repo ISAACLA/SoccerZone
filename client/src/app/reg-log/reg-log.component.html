@@ -28,40 +28,105 @@
 	<div class="container">
 		<div *ngFor='let err of errors' class="alert alert-danger" role="alert"><p>{{ err }}</p></div>
 		<div class="row">
-	    <div class="col-sm-5">
+	      <div class="col-xs-12 col-md-6">
 			<div class="panel panel-primary">
 			  <div class="panel-heading">Register</div>
 			  <div class="panel-body">
-				  <form (submit)='register(registerData)' #registerData='ngForm'>
-					  <label for="first_name">First Name: <input type="text" name="first_name" ngModel></label>
-					  <label for="last_name">Last Name: <input type="text" name="last_name" ngModel></label>
-					  <label for="username">Userame: <input type="text" name="username" ngModel></label>
-					  <label for="email">Email: <input type="email" name="email" ngModel></label>
-					  <label for="zipcode">Zipcode: <input type="number" name="zipcode" ngModel></label>
-					  <label for="password">Password: <input type="password" name="password" ngModel></label>
-					  <button type="submit" class="btn btn-default">Register</button>
+				  <form class="form-group" (submit)='register(registerData)' #registerData='ngForm'>
+					  <label for="first_name">First Name: <input class="form-control" type="text" name="first_name" ngModel></label>
+					  <label for="last_name">Last Name: <input class="form-control" type="text" name="last_name" ngModel></label>
+					  <label for="username">Userame: <input class="form-control" type="text" name="username" ngModel></label>
+					  <label for="email">Email: <input class="form-control" type="email" name="email" ngModel></label>
+					  <label for="zipcode">Zipcode: <input class="form-control" type="number" name="zipcode" ngModel></label>
+					  <label for="password">Password: <input class="form-control" type="password" name="password" ngModel></label>
+					  <p><button type="submit" class="btn btn-default">Register</button></p>
 				  </form>
 			  </div>
 			</div>
 	    </div>
-	    <div class="col-sm-5">
+	    <div class="col-xs-12 col-md-6">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Login</div>
 				<div class="panel-body">
 					<form (submit)='login(formData)' #formData='ngForm'>
-						<p>Username: <input type="text" name="username" ngModel></p>
-						<p>Password: <input type="password" name="password" ngModel></p>
-						<p><button type="submit" class="btn btn-default">Login</button></p>
+						<div class="row">
+							<div class="col-xs-9">
+								<label for="username">Username: <input class="form-control" type="text" name="username" ngModel></label>
+								<label for="password">Password: <input class="form-control" type="password" name="password" ngModel></label>
+								<p><button type="submit" class="btn btn-default">Login</button></p>
+							</div>
+						</div>
+
 					</form>
 				</div>
 			</div>
-	    </div>
-
+	      </div>
 		</div>
 	</div>
 
+	<!-- NEW REG-LOG FORM  -->
+	<!-- <div style="height:30px;"></div>
+
+	<div class="login-wrap">
+		<div *ngFor='let err of errors' class="alert alert-danger" role="alert"><p>{{ err }}</p></div>
+		<div class="login-html">
+			<input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label for="tab-1" class="tab">Log In</label>
+			<input id="tab-2" type="radio" name="tab" class="sign-up" /><label for="tab-2" class="tab">Register</label>
+			<div class="login-form">
+				<form (submit)='login(formData)' #formData='ngForm'>
+					<div class="sign-in-htm">
+						<div class="group">
+							<label class="label">Username</label>
+							<input type="text" class="input" name='username' ngModel>
+						</div>
+						<div class="group">
+							<label class="label">Password</label>
+							<input type="password" class="input" data-type="password" name='password' ngModel>
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Log In">
+						</div>
+						<div class="hr"></div>
+					</div>
+				</form>
+				<form (submit)='register(registerData)' #registerData='ngForm'>
+					<div class="sign-up-htm">
+						<div class="group">
+							<label class="label">First Name</label>
+							<input type="text" class="input" name='first_name' ngModel>
+						</div>
+						<div class="group">
+							<label class="label">Last Name</label>
+							<input type="text" class="input" name='last_name' ngModel>
+						</div>
+						<div class="group">
+							<label class="label">Username</label>
+							<input type="text" class="input" name='username' ngModel>
+						</div>
+						<div class="group">
+							<label class="label">Email</label>
+							<input type="email" class="input" name='email' ngModel>
+						</div>
+						<div class="group">
+							<label class="label">Zipcode</label>
+							<input type="number" class="input" name='zipcode' ngModel>
+						</div>
+						<div class="group">
+							<label class="label">Password</label>
+							<input type="password" class="input" name='password' ngModel>
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Register">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div> -->
+
+
 	<div class="footer">
         <h5>Briggs & Isaac</h5>
-        <p>SoccerZone.com © 2017 · All Rights Reserved</p>
+        <p>SoccerZone © 2017 · All Rights Reserved</p>
     </div>
 </div>

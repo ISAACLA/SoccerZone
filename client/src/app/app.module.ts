@@ -18,7 +18,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { TeamComponent } from './team/team.component';
 import { EventComponent } from './event/event.component';
 import { TeamShowComponent } from './team/team-show/team-show.component';
-import { EventShowComponent } from './event/event-show/event-show.component'
+import { EventShowComponent } from './event/event-show/event-show.component';
+import { ProfileShowComponent } from './profile/profile-show/profile-show.component';
+import { ProfileNewComponent } from './profile/profile-new/profile-new.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { EventShowComponent } from './event/event-show/event-show.component'
     TeamComponent,
     EventComponent,
     TeamShowComponent,
-    EventShowComponent
+    EventShowComponent,
+    ProfileShowComponent,
+    ProfileNewComponent
   ],
   imports: [
     BrowserModule,

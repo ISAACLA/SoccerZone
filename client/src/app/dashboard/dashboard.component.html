@@ -33,43 +33,44 @@
       <p><a [routerLink]="['/teams']">Create New Team</a> or <a [routerLink]="['/events']">Create New Event</a></p>
     </div>
 
-    <div class="events">
-        <h3>Local Events</h3>
-        <div class="list-group">
-          <a *ngFor="let event of events" [routerLink]="['/event', event._id]" class="list-group-item">
-            <h4 class="list-group-item-heading">{{event.events}}</h4>
-            <p class="list-group-item-text">Date: {{event.date | date: 'mediumDate'}}</p>
-            <p class="list-group-item-text">Time: {{event.time }}</p>
-            <p class="list-group-item-text">Location: {{event.location}}</p>
-            <p class="list-group-item-text">Host: {{event._user.username}}</p>
-            <button class="btn btn-success" (click)='joinEvent(event._id)'>Join</button>
-          </a>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-xs-12">
+                <div class="events">
+                    <h3>Local Events</h3>
+                    <div class="list-group">
+                      <a *ngFor="let event of events" [routerLink]="['/event', event._id]" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{event.events}}</h4>
+                        <p>Date: {{event.date | date: 'mediumDate'}}</p>
+                        <p>Time: {{event.time }}</p>
+                        <p>Location: {{event.location}}</p>
+                        <p>Host: {{event._user.username}}</p>
+                      </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="teams">
+                    <h3>Local Teams</h3>
+                    <table class="table table-bordered">
+                      <tr>
+                        <td>Name</td>
+                        <td>Captain</td>
+                        <td>Players</td>
+                      </tr>
+                      <tr *ngFor='let team of teams'>
+                        <td><a [routerLink]="['/team',team._id]">{{ team.name }}</a></td>
+                        <td>{{ team._user.username }}</td>
+                        <td>{{ team.players }}/18</td>
+                      </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="teams">
-        <h3>Local Teams</h3>
-        <table class="table table-bordered">
-          <tr>
-            <td>Name</td>
-            <td>Players</td>
-            <td>Zipcode</td>
-            <td>Join</td>
-          </tr>
-          <tr *ngFor='let team of teams'>
-            <td><a [routerLink]="['/team',team._id]">{{ team.name }}</a></td>
-            <td>{{ team.players }}/18</td>
-            <td>{{ team.zipcode }}</td>
-            <td *ngIf='team.players === 18'><button disabled class="btn btn-success" (click)='joinTeam(team._id)'>Full</button></td>
-            <td *ngIf='team.players !== 18'><button class="btn btn-success" (click)='joinTeam(team._id)'>Join</button></td>
-          </tr>
-        </table>
-    </div>
-
-
     <div class="footer">
         <h5>Briggs & Isaac</h5>
-        <p>SoccerZone.com © 2017 · All Rights Reserved</p>
+        <p>SoccerZone © 2017 · All Rights Reserved</p>
     </div>
 
 </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../event.service';
-import { RegLogService } from '../../reg-log/reg-log.service'
+import { RegLogService } from '../../reg-log/reg-log.service';
+import "rxjs";
 
 declare var google: any;
 
@@ -15,7 +16,7 @@ export class EventShowComponent implements OnInit {
   event:any;
   event_id: String;
   errors:any;
-  commentErrors:any;
+  commenterrors:any;
 
   constructor(
     private _reglogService: RegLogService,
@@ -49,7 +50,7 @@ export class EventShowComponent implements OnInit {
 
   joinEvent(event_id){
     this._eventService.joinEvent(event_id)
-    .then( (response)=>this.getEvent(event) )
+    .then( (response)=>this.getEvent(this.event_id) )
     .catch( (err)=>console.log(err))
   }
 
@@ -67,7 +68,7 @@ export class EventShowComponent implements OnInit {
      this.getEvent(this.event_id );
      formData.reset()
    })
-   .catch( (err)=>this.commentErrors= err._body.split(",") )
+   .catch( (err)=>this.commenterrors= err._body.split(",") )
  }
 
  generateMap(location){
@@ -99,5 +100,14 @@ export class EventShowComponent implements OnInit {
     }
     console.log(zip);
     codeAddress(zip);
+  }
+
+  containsUser(user, attendees) {
+    for (var i = 0; i < attendees.length; i++) {
+        if (attendees[i].username === user.username) {
+            return true;
+        }
+    }
+    return false;
   }
 }

@@ -1,46 +1,43 @@
 .body{
     height: 100%;
-    background: linear-gradient(white, #ccf);
+    background: url("./../../assets/germanStadium.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.navbar{
+    background-color: rgba(255,255,255,0.85);
+    border: none;
+    border-radius: 0px;
 }
 
 .jumbotron{
-    background: linear-gradient(-90deg, pink, lightblue);
+    background: linear-gradient(-90deg, lightblue, rgba(170, 230, 170, 0.8), lightblue);
     padding: 30px;
     margin-bottom: 10px;
 
 }
-.events{
-    width: 50%;
-    margin-left: 30px;
-    display: inline-block;
-}
-.list-group{
-    width: 95%;
-    margin-left: 40px;
-}
 
 .list-group-item{
-    background: linear-gradient(white, #f6f6f6);
-}
-.teams{
-    display: inline-table;
-    vertical-align: top;
-    margin-left: 30px;
+    background: linear-gradient(rgba(255, 255, 255, 0.8), #f6f6f6);
 }
 
 .footer{
     text-align: center;
+    background: rgba(255,255,255,0.2);
     border-top: 1px solid white;
     padding: 10px;
 }
 
+h3{
+    color: white;
+}
 
 table {
     font-family: arial, sans-serif;
     width: 200px;
-    float: right;
-    margin-right: 30px;
-    margin-left: 40px;
 }
 
 td, th {
@@ -49,9 +46,5 @@ td, th {
 }
 
 tr{
-    background-color: #fff;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background: rgba(255,255,255,0.8);
 }

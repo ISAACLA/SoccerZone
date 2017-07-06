@@ -83,7 +83,7 @@ module.exports = {
 
   newteam: (req,res)=>{
     if(!req.session.user){
-      return res.status(500).send("No user")
+      return res.status(500).send("You haven't logged in yet.")
     }else{
       let newteam = new Team (req.body);
       newteam._user=req.session.user._id
@@ -104,7 +104,7 @@ module.exports = {
 
   newevents: (req,res)=>{
     if(!req.session.user){
-      return res.status(500).send("No user")
+      return res.status(500).send("You haven't logged in yet.")
     }else{
       let newevent = new Event (req.body);
       newevent._user = req.session.user._id;
@@ -124,9 +124,9 @@ module.exports = {
 
   zipcodeteams: (req,res)=>{
     if(!req.session.user){
-      return res.status(500).send("No user")
+      return res.status(500).send("You haven't logged in yet.")
     }else{
-      Team.find({zipcode:req.session.user.zipcode},(err,theteams)=>{
+      Team.find({zipcode:req.session.user.zipcode}).populate('_user').exec((err,theteams)=>{
         if(err){
           console.log(err)
         }else{
@@ -138,7 +138,7 @@ module.exports = {
 
   zipcodeevents: (req,res)=>{
     if(!req.session.user){
-      return res.status(500).send("No User")
+      return res.status(500).send("You haven't logged in yet.")
     }else{
       Event.find({zipcode:req.session.user.zipcode}).populate('_user').exec((err,theevents)=>{
         if(err){
@@ -152,7 +152,7 @@ module.exports = {
 
   jointeam: (req,res)=>{
     if(!req.session.user){
-      return res.status(500).send("No User")
+      return res.status(500).send("You haven't logged in yet.")
     }else{
       Team.findOne({_id:req.params.id},(err,theteam)=>{
         if(err){
@@ -164,7 +164,23 @@ module.exports = {
             if(err){
               console.log(err)
             }else{
-              return res.json(savedteam)
+              //
+              User.findOne({_id:req.session.user._id},(err,theuser)=>{
+                if(err){
+                  console.log(err)
+                }else{
+                  theuser.teams.push(savedteam)
+                  theuser.save((err,saveduser)=>{
+                    if(err){
+                      console.log(err)
+                    }else{
+                      return res.json(savedteam)
+                    }
+                  })
+                }
+              })
+              //
+              // return res.json(savedteam)
             }
           })
         }
@@ -174,11 +190,11 @@ module.exports = {
 
   joinevent: (req, res)=>{
     if(!req.session.user){
-      return res.status(500).send("No User")
+      return res.status(500).send("You haven't logged in yet.")
     }else{
       Event.findOne({_id:req.params.id},(err, theEvent)=>{
         if(err){
-          console.log(err)
+          console.log("first",err)
         }else{
           for(var i = 0; i<theEvent.attendees.length; i++){
             console.log(theEvent)
@@ -189,9 +205,24 @@ module.exports = {
           theEvent.attendees.push(req.session.user);
           theEvent.save( (err,savedevent)=>{
             if(err){
-              console.log(err)
+              console.log("second",err)
             }else{
-              return res.json(savedevent)
+              //
+              User.findOne({_id:req.session.user._id},(err,theuser)=>{
+                if(err){
+                  console.log("third",err)
+                }else{
+                  theuser.events.push(savedevent)
+                  theuser.save((err,saveduser)=>{
+                    if(err){
+                      console.log("forth",err)
+                    }else{
+                      return res.json(savedevent)
+                    }
+                  })
+                }
+              })
+              // return res.json(savedevent)
             }
           })
         }
@@ -203,6 +234,8 @@ module.exports = {
     Team.findOne({_id:req.params.id})
     .populate('_user')
     .populate({path:'squad',populate:{path:'user'}})
+    .populate({path:'posts', populate:{path:'_user'}})
+    .populate({path:'posts', populate:{path:'_user'}, populate:{path:'comments',populate:{path:'_user'}}})
     .exec( (err,theteam)=>{
       if(err){
         console.log(err)
@@ -249,7 +282,7 @@ module.exports = {
 
   newpost: (req,res)=>{
     if(!req.session.user){
-      return res.status(500).send('No User')
+      return res.status(500).send("You haven't logged in yet.")
     }else{
       let newpost = new Post (req.body);
       newpost._event = req.params.id;
@@ -283,7 +316,7 @@ module.exports = {
 
   newcomment: (req, res)=>{
     if(!req.session.user){
-      return res.status(500).send("No User")
+      return res.status(500).send("You haven't logged in yet.")
     }else{
       let newcommnet = new Comment (req.body)
       newcommnet._post = req.params.id;
@@ -315,4 +348,99 @@ module.exports = {
     }
   },
 
+  teampost: (req, res)=>{
+    if(!req.session.user){
+      return res.status(500).send("You haven't logged in yet.")
+    }else{
+      let newpost = new Post(req.body);
+      newpost._team = req.params.id;
+      newpost._user = req.session.user._id;
+      newpost.save( (err,savedpost)=>{
+        if(err){
+          let errors="";
+          for (let i in err.errors){
+            errors += err.errors[i].message + ","
+          }
+          return res.status(500).send(errors)
+        }else{
+          Team.findOne({_id:req.params.id},(err,theteam)=>{
+            if(err){
+              console.log(err)
+            }else{
+              theteam.posts.push(savedpost)
+              theteam.save( (err,savedteam)=>{
+                if(err){
+                  console.log(err)
+                }else{
+                  return res.json(savedpost)
+                }
+              })
+            }
+          })
+        }
+      })
+    }
+  },
+
+  teamcomment: (req, res)=>{
+    if(!req.session.user){
+      return res.status(500).send("You haven't logged in yet.")
+    }else{
+      let newcomment = new Comment (req.body);
+      newcomment._user = req.session.user._id;
+      newcomment._team = req.params.id;
+      newcomment.save( (err,savedcomment)=>{
+        if(err){
+          let errors =""
+          for (let i in err.errors){
+            errors += err.errors[i].message + ","
+          }
+          return res.status(500).send(errors)
+        }else{
+          Post.findOne({_id:req.params.id},(err,thepost)=>{
+            if(err){
+              console.log(err)
+            }else{
+              thepost.comments.push(savedcomment);
+              thepost.save( (err,savedpost)=>{
+                if(err){
+                  console.log(err)
+                }else{
+                  return res.json(savedcomment)
+                }
+              })
+            }
+          })
+        }
+      })
+    }
+  },
+
+  usershowprofile: (req, res)=>{
+    User.findOne({_id:req.params.id})
+    .populate({path:'profiles', populete:{path:'profile'}})
+    .populate({path:'teams', populete:{path:'team'}})
+    .populate({path:'events', populete:{path:'event'}})
+    .exec((err,theuser)=>{
+      if(err){
+        console.log(err)
+      }else{
+        return res.json(theuser)
+      }
+    })
+  },
+
+  myactivities: (req,res)=>{
+    User.findOne({_id:req.session.user._id})
+    .populate({path:'profiles', populete:{path:'profile'}})
+    .populate({path:'teams', populete:{path:'team'}})
+    .populate({path:'events', populete:{path:'event'}})
+    .exec( (err,mine)=>{
+      if(err){
+        console.log(err)
+      }else{
+        return res.json(mine)
+      }
+    })
+  }
 }

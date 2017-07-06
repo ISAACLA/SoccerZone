@@ -1,12 +1,30 @@
 .body{
     height: 100%;
-    background: linear-gradient(white, #ccf);
+    position: relative;
+    background: url("./../../../assets/orangeStadium.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-bottom: 200px;
+}
+
+.navbar{
+    background-color: rgba(255,255,255,0.7);
+    border: none;
+    border-radius: 0px;
 }
 
 .list-group{
     width: 300px;
     margin-left: 40px;
     padding: 3px;
+}
+
+.container{
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 10px;
+    padding-bottom: 30px;
 }
 
 .team{
@@ -17,13 +35,10 @@
     margin-right: 60px;
 }
 
-.mapAndChat{
-    vertical-align: top;
-    display: inline-block;
-    width:600px;
-    height: 100%;
-    margin-left: 40px;
-    margin-bottom: 40px;
+.players{
+    height: 170px;
+    margin-bottom: 10px;
+    overflow-y: auto;
 }
 
 #googleMap{
@@ -34,34 +49,21 @@
     margin-bottom: 40px;
 }
 
-.chatBox{
-    vertical-align: top;
-    display: inline-block;
-    width: 400px;
-    height: 300px;
-    background-color: white;
-    border: 1px solid #bbb;
-    border-radius: 5px;
-}
-
-.chatTitle{
-    border-radius: 4px 4px 0px 0px;
-    border-bottom: 1px solid #bbb;
-    padding-left: 10px;
-    padding-top: 6px;
-    width: 398px;
-    height: 40px;
-    background-color: #337ab7;
-}
-
-.chatTitle h3{
-    margin: 0px;
-    font-weight: 300;
-}
-
 .footer{
     text-align: center;
+    background: rgba(255,255,255,0.2);
     border-top: 1px solid white;
     padding: 10px;
+    position: absolute;
+    bottom:0;
+    right:0;
+    left:0;
+}
 
+.col-sm-6{
+    color: white;
+}
+
+.col-xs-12{
+    color: white;
 }

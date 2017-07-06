@@ -20,37 +20,67 @@
             <li><a [routerLink]="['/profile']">Profile</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a [routerLink]="['/profile']" *ngIf='user'>{{ user.username }}</a></li>
+            <li *ngIf='user'><a [routerLink]="['/profile']">{{ user.username }}</a></li>
             <li><a href="/logout">Logout</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-    <div class="team" *ngIf='team'>
-        <h2>{{ team.name }}</h2>
-        <h4>Number of Players: {{ team.players }}/18</h4>
-        <div class='list-group'>
-          <button type="button" class="list-group-item" *ngFor='let player of team.squad'>{{ player.username }}</button>
-        </div>
-    <button *ngIf='team.players === 18' disabled class="btn btn-success" style="float: right" (click)='joinTeam(team._id)'>Full</button>
-    <button *ngIf='team.players !== 18' class="btn btn-success" style="float: right" (click)='joinTeam(team._id)'>Join</button>
-    </div>
+    <div class="container">
+        <div class="row">
+            <div *ngIf='team' class="col-sm-6 col-xs-12">
+                <h2>{{ team.name }}</h2>
+                <h4>Number of Players: {{ team.players }}/18</h4>
+                <div class="players">
+                    <div class='list-group'>
+                      <button *ngFor='let player of team.squad' type="button" class="list-group-item" ><a [routerLink]="['/profile', player._id]">{{ player.username }}</a></button>
+                    </div>
+                </div>
 
-    <div class="mapAndChat">
-        <h3>Location</h3>
-        <div id="googleMap"></div>
-
-        <div class="chatBox">
-            <div class="chatTitle">
-                <h3 *ngIf="team">Chat Room</h3>
+                <button disabled *ngIf='team.players === 18' class="btn btn-success">Full</button>
+                <button disabled *ngIf="containsUser(user, team.squad)  === true && team.players !== 18" class="btn btn-success">Joined</button>
+                <button *ngIf="containsUser(user, team.squad)  === false && team.players !== 18" class="btn btn-success" (click)='joinTeam(team._id)'>Join</button>
             </div>
-
+            <div class="col-sm-6 col-xs-12">
+                <h3>Location</h3>
+                <div id="googleMap"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="messageBoard">
+                  <h4>Add your post here...</h4>
+                  <form (submit)='teampost(formData, team._id)' #formData='ngForm'>
+                    <textarea class="form-control" name="post" rows="3" cols="60" ngModel></textarea>
+                    <br>
+                    <button class="btn btn-primary btn-sm" >Post</button>
+                  </form>
+                  <p *ngFor='let err of errors'> {{ err }}</p>
+                  <hr>
+                  <div *ngIf="team">
+                    <div *ngFor="let p of team.posts">
+                      <h4> <i>{{ p._user.username }}</i>: {{ p.post }}</h4>
+                      <hr>
+                      <div *ngFor="let comment of p.comments">
+                        <h5> {{ comment._user.username }} - {{ comment.comment}}</h5>
+                      </div>
+                      <hr>
+                      <form (submit)='teamcomment(formData, p._id)' #formData='ngForm'>
+                        <textarea class="form-control" name="comment" rows="2" cols="40" ngModel></textarea>
+                        <br>
+                        <button class="btn btn-primary btn-sm" >Comment</button>
+                      </form>
+                      <p *ngFor='let err of commenterrors'> {{ err }}</p>
+                    </div>
+                 </div>
+               </div>
+            </div>
         </div>
     </div>
 
     <div class="footer">
         <h5>Briggs & Isaac</h5>
-        <p>SoccerZone.com © 2017 · All Rights Reserved</p>
+        <p>SoccerZone © 2017 · All Rights Reserved</p>
     </div>
 
 </div>

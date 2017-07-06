@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RegLogService } from './../reg-log/reg-log.service';
 import { TeamService } from './../team/team.service';
 import { EventService } from './../event/event.service';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+// import "rxjs";
 
 @Component({
   selector: 'app-dashboard',
@@ -28,19 +29,23 @@ export class DashboardComponent implements OnInit {
 
   currentUser(){
     this. _reglogService.currentUser()
-    .then( (response)=>this.user=response )
+    .then( (response)=>this.user=response)
     .catch( (err)=>this._router.navigate(['']) )
   }
 
   zipcodeTeams(){
     this._teamService.zipcodeTeams()
-    .then( (response)=>this.teams= response )
+    .then( (response)=>this.teams = response)
     .catch( (err)=>console.log(err) )
   }
 
   zipcodeEvents(){
     this._eventService.zipcodeEvents()
-    .then( (response)=>this.events=response )
+    .then( (response)=>this.events=response.sort(function(a, b) {
+        a = new Date(a.date);
+        b = new Date(b.date);
+        return b>a ? -1 : b<a ? 1 : 0;
+    }))
     .catch( (err)=>console.log(err) )
   }
 
@@ -54,5 +59,14 @@ export class DashboardComponent implements OnInit {
     this._eventService.joinEvent(event_id)
     .then( (respnose)=>this.zipcodeEvents() )
     .catch( (err)=>console.log(err))
+  }
+
+  containsUser(user, attendees) {
+    for (var i = 0; i < attendees.length; i++) {
+        if (attendees[i].username === user.username) {
+            return true;
+        }
+    }
+    return false;
   }
 }
