@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 let User = mongoose.model("User");
 let Profile = mongoose.model("Profile");
@@ -9,22 +10,31 @@ let Comment = mongoose.model("Comment");
 
 module.exports = {
   register: (req, res)=>{
+    console.log("Registering User...")
+    var salt = bcrypt.genSaltSync(8);
     User.findOne({email:req.body.email}, (err, theuser)=>{
       if(theuser === null){
-        let newuser = new User (req.body);
-        newuser.save((err,saveduser)=>{
-          if(err){
-            let errors = ""
-            for (let i in err.errors){
-              errors += err.errors[i].message + ","
+        if(req.body.password){
+          var hash = bcrypt.hashSync(req.body.password, salt);
+          console.log('hashed password', hash);
+          let newUser = new User ({first_name:req.body.first_name, last_name:req.body.last_name,
+              username:req.body.username, email:req.body.email, zipcode:req.body.zipcode, password:hash});
+          newUser.save((err,savedUser)=>{
+            if(err){
+              let errors = ""
+              for (let i in err.errors){
+                errors += err.errors[i].message + ","
+              }
+              return res.status(500).send(errors)
+            }else{
+              req.session.user = savedUser;
+              return res.json(savedUser)
             }
-            return res.status(500).send(errors)
-          }else{
-            req.session.user = saveduser;
-            return res.json(saveduser)
-          }
-        })
-      }
+          })
+        }
+    }else{
+      return res.status(500).send("Username Already Exists")
+    }
     })
   },
 
@@ -33,8 +43,12 @@ module.exports = {
       if(user === null){
         return res.status(500).send("Username does not exist.")
       }else{
-        req.session.user = user
-        return res.json(user)
+        if(bcrypt.compareSync(req.body.password, user.password)){
+            req.session.user = user
+            return res.json(user)
+        }else{
+            return res.status(500).send("Incorrect Password.")
+        }
       }
     })
   },

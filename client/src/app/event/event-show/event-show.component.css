@@ -46,6 +46,10 @@
     background: rgba(255,255,255,0.2);
     border-top: 1px solid white;
     padding: 10px;
+    position: absolute;
+    bottom:0;
+    right:0;
+    left:0;
 }
 
 .col-sm-6{
@@ -54,4 +58,11 @@
 
 .col-xs-12{
     color: white;
+}
+
+@media only screen and (max-width: 1100px) {
+    #googleMap{
+        width:300px;
+        height:200px;
+    }
 }

@@ -20,7 +20,7 @@ export class RegLogComponent implements OnInit {
   register(registerData){
     this._reglogService.register(registerData.value)
     .then( (response)=>this._router.navigate(['/dashboard']) )
-    .catch( (err)=> this.errors=err._body.split(',') )
+    .catch( (err)=> this.errors=err._body )
   }
 
   login(formData){

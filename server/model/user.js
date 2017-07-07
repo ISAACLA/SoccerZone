@@ -33,8 +33,7 @@ let UserSchema = new Schema ({
   password: {
     type:String,
     required: [true, "Password is required!"],
-    minlength: [5,"Your password must have at least 5 characters"],
-    maxlength: [25, "Password have at most 25 characters"]
+    minlength: [8,"Your password must have at least 5 characters"],
   },
   zipcode: {
     type: Number,

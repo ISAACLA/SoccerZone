@@ -51,3 +51,9 @@ tr:nth-child(even) {
     right:0;
     left:0;
 }
+
+@media only screen and (max-width: 700px) {
+    .events{
+        overflow-x: auto;
+    }
+}

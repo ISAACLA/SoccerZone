@@ -45,20 +45,22 @@
                 <p *ngFor='let err of errors'>{{ err }}</p>
                 <hr>
                 <h2>All Teams</h2>
-                <table>
-                  <tr>
-                    <th>Name</th>
-                    <th>Captain</th>
-                    <th>Players</th>
-                    <th>Zipcode</th>
-                  </tr>
-                  <tr *ngFor='let team of teams'>
-                    <td><a [routerLink]="['/team', team._id]">{{ team.name }}</a></td>
-                    <td>{{ team._user.username }}</td>
-                    <td>{{ team.players }}/18</td>
-                    <td>{{ team.zipcode }}</td>        
-                  </tr>
-                </table>
+                <div class="teams">
+                    <table>
+                      <tr>
+                        <th>Name</th>
+                        <th>Captain</th>
+                        <th>Players</th>
+                        <th>Zipcode</th>
+                      </tr>
+                      <tr *ngFor='let team of teams'>
+                        <td><a [routerLink]="['/team', team._id]">{{ team.name }}</a></td>
+                        <td>{{ team._user.username }}</td>
+                        <td>{{ team.players }}/18</td>
+                        <td>{{ team.zipcode }}</td>
+                      </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
