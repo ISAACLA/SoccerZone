@@ -44,9 +44,11 @@ export class EventService {
    .map( (response:Response)=>response.json() )
    .toPromise()
   }
+
   newComment(data, postid){
    return this._http.post('/api/comments/'+ postid, data)
    .map( (response:Response)=>response.json() )
    .toPromise()
   }
+  
 }

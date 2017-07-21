@@ -4,7 +4,7 @@ let bodyparser = require('body-parser');
 const path = require ('path');
 
 let session = require('express-session');
-var whateverWeWant = {
+var sessionData = {
  secret:'themostsecuresecretkeyever', // Secret name for decoding secret and such
  resave:false, // Don't resave session if no changes were made
  saveUninitialized: true, // Don't save session if there was nothing initialized
@@ -16,7 +16,7 @@ var whateverWeWant = {
  }
 }
 
-app.use(session(whateverWeWant));
+app.use(session(sessionData));
 app.use(express.static(path.join(__dirname,'client','dist')));
 
 app.use(bodyparser.urlencoded({extended:true}));

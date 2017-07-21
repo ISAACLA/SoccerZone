@@ -16,7 +16,7 @@ export class EventShowComponent implements OnInit {
   event:any;
   event_id: String;
   errors:any;
-  commenterrors:any;
+  commentErrors:any;
 
   constructor(
     private _reglogService: RegLogService,
@@ -54,7 +54,7 @@ export class EventShowComponent implements OnInit {
     .catch( (err)=>console.log(err))
   }
 
-  newpost(formData, eventid){
+  newPost(formData, eventid){
    this._eventService.newPost(formData.value, eventid)
    .then( (response)=>{
      this.getEvent(this.event_id);
@@ -62,13 +62,13 @@ export class EventShowComponent implements OnInit {
    })
    .catch( (err)=>this.errors=err._body.split(",") )
  }
- newcomment(formData, p_id){
+ newComment(formData, p_id){
    this._eventService.newComment(formData.value, p_id)
    .then( (response)=>{
      this.getEvent(this.event_id );
      formData.reset()
    })
-   .catch( (err)=>this.commenterrors= err._body.split(",") )
+   .catch( (err)=>this.commentErrors= err._body.split(",") )
  }
 
  generateMap(location){
@@ -98,7 +98,6 @@ export class EventShowComponent implements OnInit {
        }
      });
     }
-    console.log(zip);
     codeAddress(zip);
   }
 

@@ -3,7 +3,6 @@ import { RegLogService } from './../reg-log/reg-log.service';
 import { TeamService } from './../team/team.service';
 import { EventService } from './../event/event.service';
 import { Router } from '@angular/router';
-// import "rxjs";
 
 @Component({
   selector: 'app-dashboard',
@@ -32,13 +31,13 @@ export class DashboardComponent implements OnInit {
     .then( (response)=>this.user=response)
     .catch( (err)=>this._router.navigate(['']) )
   }
-
+ // Local Teams via zipcode
   zipcodeTeams(){
     this._teamService.zipcodeTeams()
     .then( (response)=>this.teams = response)
     .catch( (err)=>console.log(err) )
   }
-
+ // Local Events via zipcode
   zipcodeEvents(){
     this._eventService.zipcodeEvents()
     .then( (response)=>this.events=response.sort(function(a, b) {
